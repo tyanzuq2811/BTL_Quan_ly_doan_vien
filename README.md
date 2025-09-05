@@ -64,19 +64,53 @@ Dưới đây là các module đã được triển khai trong hệ thống:
 
 #### 4.1.1. Tải project
 ```
-git clone https://gitlab.com/anhlta/odoo-fitdnu.git
+git clone https://gitlab.com/anhlta/odoo-fitdnu.git](https://github.com/tyanzuq2811/BTL_Quan_ly_doan_vien.git
 ```
 #### 4.1.2. Cài đặt các thư viện cần thiết
-Người sử dụng thực thi các lệnh sau đề cài đặt các thư viện cần thiết
+Người sử dụng cần cài đặt XAMPP để chạy môi trường PHP và MySQL. Thực thi các lệnh sau trên hệ điều hành Linux (nếu cần):
 
-```
-sudo apt-get install libxml2-dev libxslt-dev libldap2-dev libsasl2-dev libssl-dev python3.10-distutils python3.10-dev build-essential libssl-dev libffi-dev zlib1g-dev python3.10-venv libpq-dev
-```
-#### 4.1.3. Khởi tạo môi trường ảo.
-- Khởi tạo môi trường ảo
-```
-python3.10 -m venv ./venv
-```
+
+Trên Windows, tải và cài đặt XAMPP từ [trang chính thức](https://www.apachefriends.org/index.html).
+
+#### 4.1.3. Khởi tạo môi trường ảo
+- Sao chép toàn bộ thư mục dự án vào thư mục `htdocs` của XAMPP (ví dụ: `C:\xampp\htdocs\quan-ly-doan-vien`).
+- Khởi động XAMPP và bật các module Apache và MySQL.
+
+### 4.2. Setup database
+
+1. **Tạo cơ sở dữ liệu**:
+   - Mở MySQL WorkBench
+   - Tạo một database mới với tên `quan_ly_doan_vien`.
+   - Nhập các bảng sau :
+     - `doan_vien`
+     - `diem_ren_luyen`
+     - `doan_phi`
+     - `tai_khoan`
+
+2. **Cấu hình kết nối**:
+   - Chỉnh sửa file `db_connection.php` trong thư mục `functions` để cập nhật thông tin kết nối:
+     <?php
+
+function getDbConnection() {
+    $servername = "localhost";
+    $username = "root";
+    $password = "Dung@28112005";
+    $dbname = "quan_ly_doan_vien";
+    $port = 3306;
+
+    // Tạo kết nối
+    $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+    // Kiểm tra kết nối
+    if (!$conn) {
+        die("Kết nối database thất bại: " . mysqli_connect_error());
+    }
+    // Thiết lập charset cho kết nối (quan trọng để hiển thị tiếng Việt đúng)
+    mysqli_set_charset($conn, "utf8");
+    return $conn;
+}
+
+?>
 - Thay đổi trình thông dịch sang môi trường ảo
 ```
 source venv/bin/activate
