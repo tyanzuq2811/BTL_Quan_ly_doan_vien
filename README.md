@@ -65,14 +65,15 @@ Một số project sinh viên đã thực hiện:
   - PHP Intelephense  
   - MySQL  
   - Prettier – Code Formatter  
+### 4.2. Tải project
+Clone project về thư mục `htdocs` của XAMPP (ví dụ ổ C):
 
----
-#### 4.1.2. Cài đặt các thư viện cần thiết
-Người sử dụng thực thi các lệnh sau đề cài đặt các thư viện cần thiết
+```bash
+cd C:\xampp\htdocs
+git clone https://gitlab.com/username/qlsv-doanvien.git
+Truy cập project qua đường dẫn:
+👉 http://localhost/qlsv-doanvien
 
-```
-sudo apt-get install libxml2-dev libxslt-dev libldap2-dev libsasl2-dev libssl-dev python3.10-distutils python3.10-dev build-essential libssl-dev libffi-dev zlib1g-dev python3.10-venv libpq-dev
-```
 #### 4.1.3. Khởi tạo môi trường ảo.
 - Khởi tạo môi trường ảo
 ```
