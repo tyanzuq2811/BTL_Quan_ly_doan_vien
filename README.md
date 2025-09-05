@@ -53,67 +53,81 @@ Chào mừng bạn đến với **Hệ thống Quản lý Đoàn Viên**, một 
 Một số project sinh viên đã thực hiện:
 - #### [Khoá 15](./docs/projects/K15/README.md)
 - #### [Khoá 16]() (Coming soon)
-## ⚙️ 4. Cài đặt
+⚙️ 4. Cài đặt (XAMPP)
+4.1. Cài đặt công cụ, môi trường
 
-### 4.1. Cài đặt công cụ, môi trường và các thư viện cần thiết
+Tải và cài đặt XAMPP:
+👉 https://www.apachefriends.org/download.html
 
-#### 4.1.1. Tải project.
-```
-git clone https://gitlab.com/anhlta/odoo-fitdnu.git
-```
-#### 4.1.2. Cài đặt các thư viện cần thiết
-Người sử dụng thực thi các lệnh sau đề cài đặt các thư viện cần thiết
+(khuyến nghị bản XAMPP với PHP 8.x)
 
-```
-sudo apt-get install libxml2-dev libxslt-dev libldap2-dev libsasl2-dev libssl-dev python3.10-distutils python3.10-dev build-essential libssl-dev libffi-dev zlib1g-dev python3.10-venv libpq-dev
-```
-#### 4.1.3. Khởi tạo môi trường ảo.
-- Khởi tạo môi trường ảo
-```
-python3.10 -m venv ./venv
-```
-- Thay đổi trình thông dịch sang môi trường ảo
-```
-source venv/bin/activate
-```
-- Chạy requirements.txt để cài đặt tiếp các thư viện được yêu cầu
-```
-pip3 install -r requirements.txt
-```
-### 4.2. Setup database
+Cài đặt Visual Studio Code và các extension:
 
-Khởi tạo database trên docker bằng việc thực thi file dockercompose.yml.
-```
-sudo docker-compose up -d
-```
-### 4.3. Setup tham số chạy cho hệ thống
-Tạo tệp **odoo.conf** có nội dung như sau:
-```
-[options]
-addons_path = addons
-db_host = localhost
-db_password = odoo
-db_user = odoo
-db_port = 5431
-xmlrpc_port = 8069
-```
-Có thể kế thừa từ file **odoo.conf.template**
-### 4.4. Chạy hệ thống và cài đặt các ứng dụng cần thiết
-Lệnh chạy
-```
-python3 odoo-bin.py -c odoo.conf -u all
-```
-Người sử dụng truy cập theo đường dẫn _http://localhost:8069/_ để đăng nhập vào hệ thống.
+PHP Intelephense
 
-## 📝 5. License
+MySQL
 
-© 2024 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved.
+Prettier – Code Formatter
 
----
+4.2. Tải project
+
+Clone project về thư mục htdocs của XAMPP (ví dụ ổ C):
+
+cd C:\xampp\htdocs
+git clone https://gitlab.com/username/qlsv-doanvien.git
 
 
-© 2024 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved.
+Truy cập project qua đường dẫn:
+👉 http://localhost/index.php
 
----
+4.3. Setup database
+
+Mở XAMPP Control Panel, start Apache và MySQL.
+
+Truy cập MySQL WorkBench
+
+Tạo database:
+
+CREATE DATABASE IF NOT EXISTS quan_ly_doan_vien
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+4.4. Setup tham số kết nối
+
+Mở file db_connection trong project, chỉnh thông tin DB:
+
+<?php
+    function getDbConnection() {
+        $servername = "localhost";
+        $username = "root";
+        $password = "Dung@28112005";
+        $dbname = "quan_ly_doan_vien";
+        $port = 3306;
+        $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+        if (!$conn) {
+            die("Kết nối database thất bại: " . mysqli_connect_error());
+        }
+        mysqli_set_charset($conn, "utf8");
+        return $conn;
+    }
+?>
+4.5. Chạy hệ thống
+
+Mở XAMPP Control Panel → Start Apache và MySQL.
+
+Truy cập hệ thống:
+👉 http://localhost/index.php
+
+4.6. Đăng nhập lần đầu
+
+Hệ thống có thể cấp tài khoản admin.
+
+Admin đăng nhập xong có thể:
+
+Tạo thông tin tổ chức đoàn (Đoàn trường, Liên chi, Chi đoàn).
+
+Thêm đoàn viên và cấp tài khoản.
+
+Quản lý phân quyền theo cấp.
 
     
