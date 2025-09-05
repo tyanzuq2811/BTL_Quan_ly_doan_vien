@@ -20,7 +20,7 @@
 </div>
  
 ## 📖 1. Giới thiệu
-Quản lý đoàn viên trong trường Đại học
+Hệ thống Quản lý Đoàn viên trong trường Đại học được xây dựng nhằm hỗ trợ công tác quản lý, theo dõi và đánh giá hoạt động của Đoàn Thanh niên trong môi trường giáo dục đại học. Thay vì quản lý thủ công bằng giấy tờ hay các tệp Excel rời rạc, hệ thống mang đến một giải pháp tập trung, hiện đại và dễ sử dụng.
 
 ## 🔧 2. Các công nghệ được sử dụng
 <div align="center">
