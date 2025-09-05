@@ -53,8 +53,8 @@ Chào mừng bạn đến với **Hệ thống Quản lý Đoàn Viên**, một 
 Một số project sinh viên đã thực hiện:
 - #### [Khoá 15](./docs/projects/K15/README.md)
 - #### [Khoá 16]() (Coming soon)
-⚙️ 4. Cài đặt (XAMPP)
-4.1. Cài đặt công cụ, môi trường
+##⚙️ 4. Cài đặt (XAMPP)
+###4.1. Cài đặt công cụ, môi trường
 
 Tải và cài đặt XAMPP:
 👉 https://www.apachefriends.org/download.html
@@ -69,7 +69,7 @@ MySQL
 
 Prettier – Code Formatter
 
-4.2. Tải project
+###4.2. Tải project
 
 Clone project về thư mục htdocs của XAMPP (ví dụ ổ C):
 
@@ -80,7 +80,7 @@ git clone https://gitlab.com/username/qlsv-doanvien.git
 Truy cập project qua đường dẫn:
 👉 http://localhost/index.php
 
-4.3. Setup database
+###4.3. Setup database
 
 Mở XAMPP Control Panel, start Apache và MySQL.
 
@@ -92,7 +92,7 @@ CREATE DATABASE IF NOT EXISTS quan_ly_doan_vien
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
-4.4. Setup tham số kết nối
+###4.4. Setup tham số kết nối
 
 Mở file db_connection trong project, chỉnh thông tin DB:
 
@@ -111,14 +111,14 @@ Mở file db_connection trong project, chỉnh thông tin DB:
         return $conn;
     }
 ?>
-4.5. Chạy hệ thống
+###4.5. Chạy hệ thống
 
 Mở XAMPP Control Panel → Start Apache và MySQL.
 
 Truy cập hệ thống:
 👉 http://localhost/index.php
 
-4.6. Đăng nhập lần đầu
+###4.6. Đăng nhập lần đầu
 
 Hệ thống có thể cấp tài khoản admin.
 
