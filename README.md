@@ -4,7 +4,7 @@
     </a>
 </h2>
 <h2 align="center">
-    PLATFORM ERP
+    Youth Union Member Management
 </h2>
 <div align="center">
     <p align="center">
@@ -18,9 +18,9 @@
 [![DaiNam University](https://img.shields.io/badge/DaiNam%20University-orange?style=for-the-badge)](https://dainam.edu.vn)
 
 </div>
-
+ 
 ## 📖 1. Giới thiệu
-Platform ERP được áp dụng vào học phần Thực tập doanh nghiệp dựa trên mã nguồn mở Odoo. 
+Quản lý đoàn viên trong trường Đại học
 
 ## 🔧 2. Các công nghệ được sử dụng
 <div align="center">
@@ -44,16 +44,25 @@ Platform ERP được áp dụng vào học phần Thực tập doanh nghiệp d
 ### Database Management Tools
 [![MySQL Workbench](https://img.shields.io/badge/MySQL_Workbench-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://dev.mysql.com/downloads/workbench/)
 
-## 🚀 3. Các project đã thực hiện dựa trên Platform
+# Quản lý Đoàn Viên - Hệ thống Quản lý Đoàn Thanh Niên
 
-Một số project sinh viên đã thực hiện:
-- #### [Khoá 15](./docs/projects/K15/README.md)
-- #### [Khoá 16]() (Coming soon)
+Chào mừng bạn đến với **Hệ thống Quản lý Đoàn Viên**, một ứng dụng web được phát triển để hỗ trợ quản lý thông tin đoàn viên, điểm rèn luyện, đoàn phí, và tài khoản trong tổ chức Đoàn Thanh Niên. Dự án được xây dựng bằng PHP với cơ sở dữ liệu MySQL, chạy trên môi trường XAMPP, và cung cấp giao diện thân thiện để quản lý các hoạt động đoàn.
+
+## 🚀 3. Các project đã thực hiện
+
+Dưới đây là các module đã được triển khai trong hệ thống:
+- **Quản lý Đoàn Viên**: Thêm, sửa, xóa, và tìm kiếm thông tin đoàn viên.
+- **Quản lý Điểm Rèn Luyện**: Ghi nhận và quản lý điểm rèn luyện theo năm học và học kỳ.
+- **Quản lý Đoàn Phí**: Theo dõi các khoản đóng góp và trạng thái thanh toán.
+- **Quản lý Tài Khoản**: Quản lý thông tin đăng nhập và vai trò của người dùng.
+
+(Module khác sẽ được cập nhật trong tương lai.)
+
 ## ⚙️ 4. Cài đặt
 
 ### 4.1. Cài đặt công cụ, môi trường và các thư viện cần thiết
 
-#### 4.1.1. Tải project.
+#### 4.1.1. Tải project
 ```
 git clone https://gitlab.com/anhlta/odoo-fitdnu.git
 ```
