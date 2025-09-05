@@ -48,69 +48,30 @@ Quản lý đoàn viên trong trường Đại học
 
 Chào mừng bạn đến với **Hệ thống Quản lý Đoàn Viên**, một ứng dụng web được phát triển để hỗ trợ quản lý thông tin đoàn viên, điểm rèn luyện, đoàn phí, và tài khoản trong tổ chức Đoàn Thanh Niên. Dự án được xây dựng bằng PHP với cơ sở dữ liệu MySQL, chạy trên môi trường XAMPP, và cung cấp giao diện thân thiện để quản lý các hoạt động đoàn.
 
-## 🚀 3. Các project đã thực hiện
+## 🚀 3. Các project đã thực hiện dựa trên Platform
 
-Dưới đây là các module đã được triển khai trong hệ thống:
-- **Quản lý Đoàn Viên**: Thêm, sửa, xóa, và tìm kiếm thông tin đoàn viên.
-- **Quản lý Điểm Rèn Luyện**: Ghi nhận và quản lý điểm rèn luyện theo năm học và học kỳ.
-- **Quản lý Đoàn Phí**: Theo dõi các khoản đóng góp và trạng thái thanh toán.
-- **Quản lý Tài Khoản**: Quản lý thông tin đăng nhập và vai trò của người dùng.
-
-(Module khác sẽ được cập nhật trong tương lai.)
-
+Một số project sinh viên đã thực hiện:
+- #### [Khoá 15](./docs/projects/K15/README.md)
+- #### [Khoá 16]() (Coming soon)
 ## ⚙️ 4. Cài đặt
 
 ### 4.1. Cài đặt công cụ, môi trường và các thư viện cần thiết
 
-#### 4.1.1. Tải project
+#### 4.1.1. Tải project.
 ```
-git clone https://gitlab.com/anhlta/odoo-fitdnu.git](https://github.com/tyanzuq2811/BTL_Quan_ly_doan_vien.git
+git clone https://gitlab.com/anhlta/odoo-fitdnu.git
 ```
 #### 4.1.2. Cài đặt các thư viện cần thiết
-Người sử dụng cần cài đặt XAMPP để chạy môi trường PHP và MySQL. Thực thi các lệnh sau trên hệ điều hành Linux (nếu cần):
+Người sử dụng thực thi các lệnh sau đề cài đặt các thư viện cần thiết
 
-
-Trên Windows, tải và cài đặt XAMPP từ [trang chính thức](https://www.apachefriends.org/index.html).
-
-#### 4.1.3. Khởi tạo môi trường ảo
-- Sao chép toàn bộ thư mục dự án vào thư mục `htdocs` của XAMPP (ví dụ: `C:\xampp\htdocs\quan-ly-doan-vien`).
-- Khởi động XAMPP và bật các module Apache và MySQL.
-
-### 4.2. Setup database
-
-1. **Tạo cơ sở dữ liệu**:
-   - Mở MySQL WorkBench
-   - Tạo một database mới với tên `quan_ly_doan_vien`.
-   - Nhập các bảng sau :
-     - `doan_vien`
-     - `diem_ren_luyen`
-     - `doan_phi`
-     - `tai_khoan`
-
-2. **Cấu hình kết nối**:
-   - Chỉnh sửa file `db_connection.php` trong thư mục `functions` để cập nhật thông tin kết nối:
-     <?php
-
-function getDbConnection() {
-    $servername = "localhost";
-    $username = "root";
-    $password = "Dung@28112005";
-    $dbname = "quan_ly_doan_vien";
-    $port = 3306;
-
-    // Tạo kết nối
-    $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
-
-    // Kiểm tra kết nối
-    if (!$conn) {
-        die("Kết nối database thất bại: " . mysqli_connect_error());
-    }
-    // Thiết lập charset cho kết nối (quan trọng để hiển thị tiếng Việt đúng)
-    mysqli_set_charset($conn, "utf8");
-    return $conn;
-}
-
-?>
+```
+sudo apt-get install libxml2-dev libxslt-dev libldap2-dev libsasl2-dev libssl-dev python3.10-distutils python3.10-dev build-essential libssl-dev libffi-dev zlib1g-dev python3.10-venv libpq-dev
+```
+#### 4.1.3. Khởi tạo môi trường ảo.
+- Khởi tạo môi trường ảo
+```
+python3.10 -m venv ./venv
+```
 - Thay đổi trình thông dịch sang môi trường ảo
 ```
 source venv/bin/activate
@@ -145,6 +106,11 @@ python3 odoo-bin.py -c odoo.conf -u all
 Người sử dụng truy cập theo đường dẫn _http://localhost:8069/_ để đăng nhập vào hệ thống.
 
 ## 📝 5. License
+
+© 2024 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved.
+
+---
+
 
 © 2024 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved.
 
