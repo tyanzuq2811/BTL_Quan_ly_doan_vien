@@ -57,10 +57,16 @@ Một số project sinh viên đã thực hiện:
 
 ### 4.1. Cài đặt công cụ, môi trường và các thư viện cần thiết
 
-#### 4.1.1. Tải project.
-```
-git clone https://gitlab.com/anhlta/odoo-fitdnu.git
-```
+- Tải và cài đặt **XAMPP**  
+  👉 https://www.apachefriends.org/download.html  
+  (Khuyến nghị bản XAMPP với PHP 8.x)
+
+- Cài đặt **Visual Studio Code** và các extension:
+  - PHP Intelephense  
+  - MySQL  
+  - Prettier – Code Formatter  
+
+---
 #### 4.1.2. Cài đặt các thư viện cần thiết
 Người sử dụng thực thi các lệnh sau đề cài đặt các thư viện cần thiết
 
