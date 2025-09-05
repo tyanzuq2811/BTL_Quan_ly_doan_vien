@@ -50,8 +50,17 @@ Quản lý đoàn viên trong trường Đại học
 
 <img width="1904" height="942" alt="image" src="https://github.com/user-attachments/assets/f447c1c7-7688-4d6c-bffd-ee2b776ac916" />
 
-### xem danh sách tài khoản
-<img width="1904" height="942" alt="image" src="https://github.com/user-attachments/assets/f447c1c7-7688-4d6c-bffd-ee2b776ac916" />
+### Trang xem danh sách tài khoản
+<img width="1888" height="943" alt="image" src="https://github.com/user-attachments/assets/1c7176f3-f662-4dd4-a99e-94474d9c62d2" />
+### Trang xem tổ chức đoàn 
+<img width="1879" height="944" alt="image" src="https://github.com/user-attachments/assets/13aba4fa-922f-4a67-99e3-e1e8df1ffaa1" />
+### Trang xem đoàn viên 
+<img width="1888" height="949" alt="image" src="https://github.com/user-attachments/assets/66e4c8b4-c39f-4dc1-a472-ef7e569f35c4" />
+### Trang xem đoàn phí
+<img width="1888" height="939" alt="image" src="https://github.com/user-attachments/assets/8bbe2d42-1d4f-4a7a-bf60-9d2e6120e9a7" />
+### Trang xem điểm rèn luyện 
+<img width="1888" height="942" alt="image" src="https://github.com/user-attachments/assets/e5103264-da76-4983-ab73-a86999144eed" />
+
 ## ⚙️ 4. Cài đặt
 
 ### 4.1. Cài đặt công cụ, môi trường và các thư viện cần thiết
