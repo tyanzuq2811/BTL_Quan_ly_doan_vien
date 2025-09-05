@@ -26,7 +26,8 @@ Platform ERP được áp dụng vào học phần Thực tập doanh nghiệp d
 <div align="center">
 
 ### Hệ điều hành
-[![MacOS](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white](https://img.shields.io/badge/mac%20os%20(apple%20silicon)-000000?logo=macos&logoColor=F0F0F0&style=for-the-badge))]([https://www.microsoft.com/en-us/windows/](https://support.apple.com/en-us/102662))
+[![MacOS]([https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white](https://img.shields.io/badge/mac%20os%20(apple%20silicon)-000000?logo=macos&logoColor=F0F0F0&style=for-the-badge)](https://img.shields.io/badge/mac%20os%20(apple%20silicon)-000000?logo=macos&logoColor=F0F0F0&style=for-the-badge
+))]([https://www.microsoft.com/en-us/windows/](https://support.apple.com/en-us/102662))
 [![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://www.microsoft.com/en-us/windows/)
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com/)
 
