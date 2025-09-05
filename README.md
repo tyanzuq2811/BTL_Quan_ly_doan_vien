@@ -45,9 +45,10 @@ Quản lý đoàn viên trong trường Đại học
 [![MySQL Workbench](https://img.shields.io/badge/MySQL_Workbench-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://dev.mysql.com/downloads/workbench/)
 </div>
 
-## 🚀 3. Quản lý Đoàn Viên - Hệ thống Quản lý Đoàn Thanh Niên
+## 🚀 3. Hình ảnh các chức năng
 
-Chào mừng bạn đến với **Hệ thống Quản lý Đoàn Viên**, một ứng dụng web được phát triển để hỗ trợ quản lý thông tin đoàn viên, điểm rèn luyện, đoàn phí, và tài khoản trong tổ chức Đoàn Thanh Niên. Dự án được xây dựng bằng PHP với cơ sở dữ liệu MySQL, chạy trên môi trường XAMPP, và cung cấp giao diện thân thiện để quản lý các hoạt động đoàn.
+<img width="1904" height="942" alt="image" src="https://github.com/user-attachments/assets/f447c1c7-7688-4d6c-bffd-ee2b776ac916" />
+
 ## ⚙️ 4. Cài đặt
 
 ### 4.1. Cài đặt công cụ, môi trường và các thư viện cần thiết
