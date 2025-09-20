@@ -79,6 +79,36 @@ $teams = getAllTeams();
                                 <span class="hide-menu">Quản lý điểm rèn luyện</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/BTL/views/event.php" aria-expanded="false">
+                                <span><iconify-icon icon="solar:calendar-bold-duotone" class="fs-6"></iconify-icon></span>
+                                <span class="hide-menu">Quản lý sự kiện</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/BTL/views/event_participation.php" aria-expanded="false">
+                                <span><iconify-icon icon="solar:users-group-two-rounded-bold-duotone" class="fs-6"></iconify-icon></span>
+                                <span class="hide-menu">Quản lý tham gia sự kiện</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/BTL/views/award.php" aria-expanded="false">
+                                <span><iconify-icon icon="solar:medal-star-bold-duotone" class="fs-6"></iconify-icon></span>
+                                <span class="hide-menu">Quản lý khen thưởng</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/BTL/views/discipline.php" aria-expanded="false">
+                                <span><iconify-icon icon="solar:document-bold-duotone" class="fs-6"></iconify-icon></span>
+                                <span class="hide-menu">Quản lý kỷ luật</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/BTL/views/notification.php" aria-expanded="false">
+                                <span><iconify-icon icon="solar:bell-bold-duotone" class="fs-6"></iconify-icon></span>
+                                <span class="hide-menu">Quản lý thông báo</span>
+                            </a>
+                        </li>
                         <li class="nav-small-cap">
                             <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-6"></iconify-icon>
                             <span class="hide-menu">AUTH</span>

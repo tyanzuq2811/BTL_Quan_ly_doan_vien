@@ -4,7 +4,12 @@ require_once __DIR__ . '/../functions/youth_union_team_functions.php';
 
 checkLogin(__DIR__ . '/../authentication_login.php');
 $search = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING) ?? '';
-$teams = getAllTeams($search);
+$page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ?? 1;
+$limit = 10; 
+$offset = ($page - 1) * $limit;
+$teams = getAllTeams($search, $limit, $offset);
+$total_teams = getTotalTeams($search);
+$total_pages = ceil($total_teams / $limit);
 
 include __DIR__ . '/header.php';
 ?>
@@ -26,7 +31,6 @@ include __DIR__ . '/header.php';
         </div>
     <?php endif; ?>
 
-    <!-- Search Form -->
     <form method="get" action="/BTL/views/youth_union_team.php" class="mb-3">
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Tìm kiếm chi đoàn hoặc liên chi đoàn..." value="<?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8') ?>">
@@ -70,7 +74,22 @@ include __DIR__ . '/header.php';
         </tbody>
     </table>
 
-    <!-- Delete Confirmation Modal -->
+    <nav aria-label="Phân trang">
+        <ul class="pagination justify-content-center">
+            <?php if ($page > 1): ?>
+                <li class="page-item"><a class="page-link" href="?page=<?= $page - 1 ?>&search=<?= htmlspecialchars($search) ?>">Trang trước</a></li>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <li class="page-item <?= $i == $page ? 'active' : '' ?>"><a class="page-link" href="?page=<?= $i ?>&search=<?= htmlspecialchars($search) ?>"><?= $i ?></a></li>
+            <?php endfor; ?>
+
+            <?php if ($page < $total_pages): ?>
+                <li class="page-item"><a class="page-link" href="?page=<?= $page + 1 ?>&search=<?= htmlspecialchars($search) ?>">Trang sau</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

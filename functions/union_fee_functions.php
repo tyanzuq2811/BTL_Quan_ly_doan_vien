@@ -1,10 +1,8 @@
 <?php
 require_once __DIR__ . '/db_connection.php';
+require_once __DIR__ . '/member_functions.php';
 
-/**
- * Get all union fee records with member and fee type names, optionally filtered by search term
- */
-function getAllFees($search = '') {
+function getAllFees($search = '', $limit = 10, $offset = 0) {
     $conn = getDbConnection();
     if (!$conn) {
         return [];
@@ -15,11 +13,12 @@ function getAllFees($search = '') {
             JOIN doan_vien dv ON dp.doan_vien_id = dv.id
             JOIN loai_doan_phi ldp ON dp.loai_doan_phi_id = ldp.id
             WHERE dv.ho_ten LIKE ? OR ldp.ten LIKE ?
-            ORDER BY dp.id";
+            ORDER BY dp.ngay_nop DESC
+            LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {
         $searchTerm = '%' . mysqli_real_escape_string($conn, $search) . '%';
-        mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
+        mysqli_stmt_bind_param($stmt, "ssii", $searchTerm, $searchTerm, $limit, $offset);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $fees = [];
@@ -35,9 +34,33 @@ function getAllFees($search = '') {
     return $fees;
 }
 
-/**
- * Add a new union fee record
- */
+function getTotalFees($search = '') {
+    $conn = getDbConnection();
+    if (!$conn) {
+        return 0;
+    }
+    $sql = "SELECT COUNT(*) AS total
+            FROM doan_phi dp
+            JOIN doan_vien dv ON dp.doan_vien_id = dv.id
+            JOIN loai_doan_phi ldp ON dp.loai_doan_phi_id = ldp.id
+            WHERE dv.ho_ten LIKE ? OR ldp.ten LIKE ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    if ($stmt) {
+        $searchTerm = '%' . mysqli_real_escape_string($conn, $search) . '%';
+        mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+        $total = $row['total'];
+        mysqli_stmt_close($stmt);
+        mysqli_free_result($result);
+    } else {
+        $total = 0;
+    }
+    mysqli_close($conn);
+    return $total;
+}
+
 function addFee($doan_vien_id, $loai_doan_phi_id, $nam_hoc, $so_tien, $ngay_nop, $trang_thai) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -60,9 +83,6 @@ function addFee($doan_vien_id, $loai_doan_phi_id, $nam_hoc, $so_tien, $ngay_nop,
     return false;
 }
 
-/**
- * Get union fee record by ID
- */
 function getFeeById($id) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -85,9 +105,6 @@ function getFeeById($id) {
     return null;
 }
 
-/**
- * Update a union fee record
- */
 function updateFee($id, $doan_vien_id, $loai_doan_phi_id, $nam_hoc, $so_tien, $ngay_nop, $trang_thai) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -110,9 +127,6 @@ function updateFee($id, $doan_vien_id, $loai_doan_phi_id, $nam_hoc, $so_tien, $n
     return false;
 }
 
-/**
- * Delete a union fee record
- */
 function deleteFee($id) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -132,9 +146,6 @@ function deleteFee($id) {
     return false;
 }
 
-/**
- * Get all union fee types
- */
 function getAllFeeTypes() {
     $conn = getDbConnection();
     if (!$conn) {

@@ -1,10 +1,9 @@
 <?php
 require_once __DIR__ . '/db_connection.php';
+require_once __DIR__ . '/member_functions.php';
+require_once __DIR__ . '/youth_union_team_functions.php';
 
-/**
- * Get all participation history records with member and team names, optionally filtered by search term
- */
-function getAllHistories($search = '') {
+function getAllHistories($search = '', $limit = 10, $offset = 0) {
     $conn = getDbConnection();
     if (!$conn) {
         return [];
@@ -15,11 +14,12 @@ function getAllHistories($search = '') {
             JOIN doan_vien dv ON lstg.doan_vien_id = dv.id
             JOIN chi_doan cd ON lstg.chi_doan_id = cd.id
             WHERE dv.ho_ten LIKE ? OR cd.ten LIKE ?
-            ORDER BY lstg.id";
+            ORDER BY lstg.ngay_bat_dau DESC
+            LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {
         $searchTerm = '%' . mysqli_real_escape_string($conn, $search) . '%';
-        mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
+        mysqli_stmt_bind_param($stmt, "ssii", $searchTerm, $searchTerm, $limit, $offset);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $histories = [];
@@ -35,9 +35,33 @@ function getAllHistories($search = '') {
     return $histories;
 }
 
-/**
- * Add a new participation history record
- */
+function getTotalHistories($search = '') {
+    $conn = getDbConnection();
+    if (!$conn) {
+        return 0;
+    }
+    $sql = "SELECT COUNT(*) AS total
+            FROM lich_su_tham_gia lstg
+            JOIN doan_vien dv ON lstg.doan_vien_id = dv.id
+            JOIN chi_doan cd ON lstg.chi_doan_id = cd.id
+            WHERE dv.ho_ten LIKE ? OR cd.ten LIKE ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    if ($stmt) {
+        $searchTerm = '%' . mysqli_real_escape_string($conn, $search) . '%';
+        mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+        $total = $row['total'];
+        mysqli_stmt_close($stmt);
+        mysqli_free_result($result);
+    } else {
+        $total = 0;
+    }
+    mysqli_close($conn);
+    return $total;
+}
+
 function addHistory($doan_vien_id, $chi_doan_id, $ngay_bat_dau, $ngay_ket_thuc, $trang_thai) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -59,9 +83,6 @@ function addHistory($doan_vien_id, $chi_doan_id, $ngay_bat_dau, $ngay_ket_thuc, 
     return false;
 }
 
-/**
- * Get participation history record by ID
- */
 function getHistoryById($id) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -84,9 +105,6 @@ function getHistoryById($id) {
     return null;
 }
 
-/**
- * Update a participation history record
- */
 function updateHistory($id, $doan_vien_id, $chi_doan_id, $ngay_bat_dau, $ngay_ket_thuc, $trang_thai) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -108,9 +126,6 @@ function updateHistory($id, $doan_vien_id, $chi_doan_id, $ngay_bat_dau, $ngay_ke
     return false;
 }
 
-/**
- * Delete a participation history record
- */
 function deleteHistory($id) {
     $conn = getDbConnection();
     if (!$conn) {

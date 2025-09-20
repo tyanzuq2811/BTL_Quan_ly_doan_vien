@@ -1,15 +1,11 @@
 <?php
 require_once __DIR__ . '/../functions/participation_history_functions.php';
 
-// Enable error reporting for development (remove in production)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-// Start session for consistent error handling
 session_start();
 
-// Determine action
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? '';
 
 switch ($action) {
@@ -28,9 +24,6 @@ switch ($action) {
         exit();
 }
 
-/**
- * Handle adding a new history record
- */
 function handleAddHistory() {
     $doan_vien_id = filter_input(INPUT_POST, 'doan_vien_id', FILTER_VALIDATE_INT) ?? 0;
     $chi_doan_id = filter_input(INPUT_POST, 'chi_doan_id', FILTER_VALIDATE_INT) ?? 0;
@@ -55,9 +48,6 @@ function handleAddHistory() {
     }
 }
 
-/**
- * Handle editing a history record
- */
 function handleEditHistory() {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? 0;
     $doan_vien_id = filter_input(INPUT_POST, 'doan_vien_id', FILTER_VALIDATE_INT) ?? 0;
@@ -83,9 +73,6 @@ function handleEditHistory() {
     }
 }
 
-/**
- * Handle deleting a history record
- */
 function handleDeleteHistory() {
     $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) ?? 0;
 

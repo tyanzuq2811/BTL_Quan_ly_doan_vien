@@ -1,15 +1,11 @@
 <?php
 require_once __DIR__ . '/../functions/youth_union_team_functions.php';
 
-// Enable error reporting for development (remove in production)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-// Start session for consistent error handling
 session_start();
 
-// Determine action
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? '';
 
 switch ($action) {
@@ -28,9 +24,6 @@ switch ($action) {
         exit();
 }
 
-/**
- * Handle adding a new team
- */
 function handleAddTeam() {
     $ten = filter_input(INPUT_POST, 'ten', FILTER_SANITIZE_STRING) ?? '';
     $lien_chi_id = filter_input(INPUT_POST, 'lien_chi_id', FILTER_VALIDATE_INT) ?? 0;
@@ -54,9 +47,6 @@ function handleAddTeam() {
     }
 }
 
-/**
- * Handle editing a team
- */
 function handleEditTeam() {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? 0;
     $ten = filter_input(INPUT_POST, 'ten', FILTER_SANITIZE_STRING) ?? '';
@@ -81,9 +71,6 @@ function handleEditTeam() {
     }
 }
 
-/**
- * Handle deleting a team
- */
 function handleDeleteTeam() {
     $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) ?? 0;
 

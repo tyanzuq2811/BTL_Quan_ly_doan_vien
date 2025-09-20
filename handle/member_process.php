@@ -1,15 +1,11 @@
 <?php
 require_once __DIR__ . '/../functions/member_functions.php';
 
-// Enable error reporting for development (remove in production)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-// Start session for consistent error handling
 session_start();
 
-// Determine action
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? '';
 
 switch ($action) {
@@ -28,9 +24,6 @@ switch ($action) {
         exit();
 }
 
-/**
- * Handle adding a new member
- */
 function handleAddMember() {
     $mssv = filter_input(INPUT_POST, 'mssv', FILTER_SANITIZE_STRING) ?? '';
     $ho_ten = filter_input(INPUT_POST, 'ho_ten', FILTER_SANITIZE_STRING) ?? '';
@@ -60,9 +53,6 @@ function handleAddMember() {
     }
 }
 
-/**
- * Handle editing a member
- */
 function handleEditMember() {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? 0;
     $mssv = filter_input(INPUT_POST, 'mssv', FILTER_SANITIZE_STRING) ?? '';
@@ -93,9 +83,6 @@ function handleEditMember() {
     }
 }
 
-/**
- * Handle deleting a member
- */
 function handleDeleteMember() {
     $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) ?? 0;
 

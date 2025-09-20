@@ -1,41 +1,63 @@
 <?php
 require_once __DIR__ . '/db_connection.php';
 
-/**
- * Get all training score records with member names, optionally filtered by search term
- */
-function getAllScores($search = '') {
+function getAllScores($search = '', $limit = 10, $offset = 0) {
     $conn = getDbConnection();
     if (!$conn) {
         return [];
     }
-    $sql = "SELECT drl.id, drl.doan_vien_id, dv.ho_ten AS doan_vien_ho_ten, drl.nam_hoc, drl.hoc_ky, drl.diem, drl.xep_loai, drl.ghi_chu
+    $sql = "SELECT drl.id, drl.doan_vien_id, drl.nam_hoc, drl.diem, drl.xep_loai, drl.ghi_chu, 
+                   dv.ho_ten AS doan_vien_ho_ten
             FROM diem_ren_luyen drl
             JOIN doan_vien dv ON drl.doan_vien_id = dv.id
             WHERE dv.ho_ten LIKE ? OR drl.nam_hoc LIKE ?
-            ORDER BY drl.id";
+            ORDER BY drl.nam_hoc DESC
+            LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {
         $searchTerm = '%' . mysqli_real_escape_string($conn, $search) . '%';
-        mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
+        mysqli_stmt_bind_param($stmt, "ssii", $searchTerm, $searchTerm, $limit, $offset);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
-        $scores = [];
+        $points = [];
         if ($result && mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
-                $scores[] = $row;
+                $points[] = $row;
             }
         }
         mysqli_stmt_close($stmt);
         mysqli_free_result($result);
     }
     mysqli_close($conn);
-    return $scores;
+    return $points;
 }
 
-/**
- * Add a new training score record
- */
+function getTotalScores($search = '') {
+    $conn = getDbConnection();
+    if (!$conn) {
+        return 0;
+    }
+    $sql = "SELECT COUNT(*) AS total
+            FROM diem_ren_luyen drl
+            JOIN doan_vien dv ON drl.doan_vien_id = dv.id
+            WHERE dv.ho_ten LIKE ? OR drl.nam_hoc LIKE ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    if ($stmt) {
+        $searchTerm = '%' . mysqli_real_escape_string($conn, $search) . '%';
+        mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+        $total = $row['total'];
+        mysqli_stmt_close($stmt);
+        mysqli_free_result($result);
+    } else {
+        $total = 0;
+    }
+    mysqli_close($conn);
+    return $total;
+}
+
 function addScore($doan_vien_id, $nam_hoc, $hoc_ky, $diem, $xep_loai, $ghi_chu) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -58,9 +80,6 @@ function addScore($doan_vien_id, $nam_hoc, $hoc_ky, $diem, $xep_loai, $ghi_chu) 
     return false;
 }
 
-/**
- * Get training score record by ID
- */
 function getScoreById($id) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -83,9 +102,6 @@ function getScoreById($id) {
     return null;
 }
 
-/**
- * Update a training score record
- */
 function updateScore($id, $doan_vien_id, $nam_hoc, $hoc_ky, $diem, $xep_loai, $ghi_chu) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -108,9 +124,6 @@ function updateScore($id, $doan_vien_id, $nam_hoc, $hoc_ky, $diem, $xep_loai, $g
     return false;
 }
 
-/**
- * Delete a training score record
- */
 function deleteScore($id) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -130,9 +143,6 @@ function deleteScore($id) {
     return false;
 }
 
-/**
- * Calculate rank based on score
- */
 function calculateRank($diem) {
     if ($diem >= 90) return 'Xuất sắc';
     if ($diem >= 80) return 'Tốt';

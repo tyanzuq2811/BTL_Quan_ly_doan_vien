@@ -1,10 +1,7 @@
 <?php
 require_once __DIR__ . '/db_connection.php';
 
-/**
- * Get all members with team names, optionally filtered by search term
- */
-function getAllMembers($search = '') {
+function getAllMembers($search = '', $limit = 10, $offset = 0) {
     $conn = getDbConnection();
     if (!$conn) {
         return [];
@@ -14,11 +11,12 @@ function getAllMembers($search = '') {
             FROM doan_vien dv
             LEFT JOIN chi_doan cd ON dv.chi_doan_id = cd.id
             WHERE dv.mssv LIKE ? OR dv.ho_ten LIKE ? OR dv.email LIKE ?
-            ORDER BY dv.id";
+            ORDER BY dv.id
+            LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {
         $searchTerm = '%' . mysqli_real_escape_string($conn, $search) . '%';
-        mysqli_stmt_bind_param($stmt, "sss", $searchTerm, $searchTerm, $searchTerm);
+        mysqli_stmt_bind_param($stmt, "sssii", $searchTerm, $searchTerm, $searchTerm, $limit, $offset);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $members = [];
@@ -34,9 +32,31 @@ function getAllMembers($search = '') {
     return $members;
 }
 
-/**
- * Add a new member
- */
+function getTotalMembers($search = '') {
+    $conn = getDbConnection();
+    if (!$conn) {
+        return 0;
+    }
+    $sql = "SELECT COUNT(*) AS total
+            FROM doan_vien dv
+            WHERE dv.mssv LIKE ? OR dv.ho_ten LIKE ? OR dv.email LIKE ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    if ($stmt) {
+        $searchTerm = '%' . mysqli_real_escape_string($conn, $search) . '%';
+        mysqli_stmt_bind_param($stmt, "sss", $searchTerm, $searchTerm, $searchTerm);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+        $total = $row['total'];
+        mysqli_stmt_close($stmt);
+        mysqli_free_result($result);
+    } else {
+        $total = 0;
+    }
+    mysqli_close($conn);
+    return $total;
+}
+
 function addMember($mssv, $ho_ten, $ngay_sinh, $gioi_tinh, $email, $so_dien_thoai, $dia_chi, $ngay_vao_doan, $chi_doan_id, $trang_thai) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -63,9 +83,6 @@ function addMember($mssv, $ho_ten, $ngay_sinh, $gioi_tinh, $email, $so_dien_thoa
     return false;
 }
 
-/**
- * Get member by ID
- */
 function getMemberById($id) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -88,9 +105,6 @@ function getMemberById($id) {
     return null;
 }
 
-/**
- * Update a member
- */
 function updateMember($id, $mssv, $ho_ten, $ngay_sinh, $gioi_tinh, $email, $so_dien_thoai, $dia_chi, $ngay_vao_doan, $chi_doan_id, $trang_thai) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -117,9 +131,6 @@ function updateMember($id, $mssv, $ho_ten, $ngay_sinh, $gioi_tinh, $email, $so_d
     return false;
 }
 
-/**
- * Delete a member
- */
 function deleteMember($id) {
     $conn = getDbConnection();
     if (!$conn) {

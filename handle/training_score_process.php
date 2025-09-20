@@ -1,15 +1,11 @@
 <?php
 require_once __DIR__ . '/../functions/training_score_functions.php';
 
-// Enable error reporting for development (remove in production)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-// Start session for consistent error handling
 session_start();
 
-// Determine action
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? '';
 
 switch ($action) {
@@ -28,9 +24,6 @@ switch ($action) {
         exit();
 }
 
-/**
- * Handle adding a new training score record
- */
 function handleAddScore() {
     $doan_vien_id = filter_input(INPUT_POST, 'doan_vien_id', FILTER_VALIDATE_INT) ?? 0;
     $nam_hoc = filter_input(INPUT_POST, 'nam_hoc', FILTER_SANITIZE_STRING) ?? '';
@@ -56,9 +49,6 @@ function handleAddScore() {
     }
 }
 
-/**
- * Handle editing a training score record
- */
 function handleEditScore() {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? 0;
     $doan_vien_id = filter_input(INPUT_POST, 'doan_vien_id', FILTER_VALIDATE_INT) ?? 0;
@@ -85,9 +75,6 @@ function handleEditScore() {
     }
 }
 
-/**
- * Handle deleting a training score record
- */
 function handleDeleteScore() {
     $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) ?? 0;
 

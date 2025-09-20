@@ -10,22 +10,18 @@
 </head>
 
 <body>
-  <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
-    <!-- Sidebar Start -->
     <aside class="left-sidebar">
-      <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.html" class="text-nowrap logo-img">
+          <a href="dashboard.php" class="text-nowrap logo-img">
             <img src="../assets/images/logos/logo-light.svg" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
           </div>
         </div>
-        <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
             <li class="nav-small-cap">
@@ -80,6 +76,36 @@
                 <span class="hide-menu">Quản lý điểm rèn luyện</span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/BTL/views/event.php" aria-expanded="false">
+                <span><iconify-icon icon="solar:calendar-bold-duotone" class="fs-6"></iconify-icon></span>
+                <span class="hide-menu">Quản lý sự kiện</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/BTL/views/event_participation.php" aria-expanded="false">
+                <span><iconify-icon icon="solar:users-group-two-rounded-bold-duotone" class="fs-6"></iconify-icon></span>
+                <span class="hide-menu">Quản lý tham gia sự kiện</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/BTL/views/award.php" aria-expanded="false">
+                <span><iconify-icon icon="solar:medal-star-bold-duotone" class="fs-6"></iconify-icon></span>
+                <span class="hide-menu">Quản lý khen thưởng</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/BTL/views/discipline.php" aria-expanded="false">
+                <span><iconify-icon icon="solar:document-bold-duotone" class="fs-6"></iconify-icon></span>
+                <span class="hide-menu">Quản lý kỷ luật</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/BTL/views/notification.php" aria-expanded="false">
+                <span><iconify-icon icon="solar:bell-bold-duotone" class="fs-6"></iconify-icon></span>
+                <span class="hide-menu">Quản lý thông báo</span>
+              </a>
+            </li>
             <li class="nav-small-cap">
               <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-6" class="fs-6"></iconify-icon>
               <span class="hide-menu">AUTH</span>
@@ -101,14 +127,9 @@
             </div>
           </div>
         </nav>
-        <!-- End Sidebar navigation -->
       </div>
-      <!-- End Sidebar scroll-->
     </aside>
-    <!--  Sidebar End -->
-    <!--  Main wrapper -->
     <div class="body-wrapper">
-      <!--  Header Start -->
       <header class="app-header">
         <nav class="navbar navbar-expand-lg navbar-light">
           <ul class="navbar-nav">
@@ -145,4 +166,3 @@
           </div>
         </nav>
       </header>
-      <!--  Header End -->

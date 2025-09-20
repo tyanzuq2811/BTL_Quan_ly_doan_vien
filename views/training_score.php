@@ -4,7 +4,12 @@ require_once __DIR__ . '/../functions/training_score_functions.php';
 
 checkLogin(__DIR__ . '/../authentication_login.php');
 $search = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING) ?? '';
-$scores = getAllScores($search);
+$page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ?? 1;
+$limit = 10;
+$offset = ($page - 1) * $limit;
+$points = getAllScores($search, $limit, $offset);
+$total_points = getTotalScores($search);
+$total_pages = ceil($total_points / $limit);
 
 include __DIR__ . '/header.php';
 ?>
@@ -26,15 +31,14 @@ include __DIR__ . '/header.php';
         </div>
     <?php endif; ?>
 
-    <!-- Search Form -->
-    <form method="get" action="/BTL/views/training_score.php" class="mb-3">
+    <form method="get" action="/BTL/views/point.php" class="mb-3">
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo tên đoàn viên hoặc năm học..." value="<?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8') ?>">
             <button class="btn btn-primary" type="submit">Tìm kiếm</button>
         </div>
     </form>
 
-    <a href="/BTL/views/training_score/training_score_create.php" class="btn btn-primary mb-3">Thêm điểm rèn luyện</a>
+    <a href="/BTL/views/point/point_create.php" class="btn btn-primary mb-3">Thêm điểm rèn luyện</a>
 
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
@@ -42,7 +46,6 @@ include __DIR__ . '/header.php';
                 <th scope="col">ID</th>
                 <th scope="col">Đoàn viên</th>
                 <th scope="col">Năm học</th>
-                <th scope="col">Học kỳ</th>
                 <th scope="col">Điểm</th>
                 <th scope="col">Xếp loại</th>
                 <th scope="col">Ghi chú</th>
@@ -50,31 +53,45 @@ include __DIR__ . '/header.php';
             </tr>
         </thead>
         <tbody>
-            <?php if (!empty($scores)): ?>
-                <?php foreach ($scores as $score): ?>
+            <?php if (!empty($points)): ?>
+                <?php foreach ($points as $point): ?>
                     <tr>
-                        <td><?= htmlspecialchars($score['id'], ENT_QUOTES, 'UTF-8') ?></td>
-                        <td><?= htmlspecialchars($score['doan_vien_ho_ten'], ENT_QUOTES, 'UTF-8') ?></td>
-                        <td><?= htmlspecialchars($score['nam_hoc'], ENT_QUOTES, 'UTF-8') ?></td>
-                        <td><?= htmlspecialchars($score['hoc_ky'], ENT_QUOTES, 'UTF-8') ?></td>
-                        <td><?= htmlspecialchars($score['diem'], ENT_QUOTES, 'UTF-8') ?></td>
-                        <td><?= htmlspecialchars($score['xep_loai'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
-                        <td><?= htmlspecialchars($score['ghi_chu'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars($point['id'], ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars($point['doan_vien_ho_ten'], ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars($point['nam_hoc'], ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars($point['diem'], ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars($point['xep_loai'], ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars($point['ghi_chu'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
                         <td>
-                            <a href="/BTL/views/training_score/training_score_edit.php?id=<?= htmlspecialchars($score['id'], ENT_QUOTES, 'UTF-8') ?>" class="btn btn-warning btn-sm">Sửa</a>
-                            <button class="btn btn-danger btn-sm" onclick="showDeleteModal(<?= htmlspecialchars($score['id'], ENT_QUOTES, 'UTF-8') ?>, '<?= htmlspecialchars($score['doan_vien_ho_ten'], ENT_QUOTES, 'UTF-8') ?>')">Xóa</button>
+                            <a href="/BTL/views/point/point_edit.php?id=<?= htmlspecialchars($point['id'], ENT_QUOTES, 'UTF-8') ?>" class="btn btn-warning btn-sm">Sửa</a>
+                            <button class="btn btn-danger btn-sm" onclick="showDeleteModal(<?= htmlspecialchars($point['id'], ENT_QUOTES, 'UTF-8') ?>, '<?= htmlspecialchars($point['doan_vien_ho_ten'] . ' - ' . $point['nam_hoc'], ENT_QUOTES, 'UTF-8') ?>')">Xóa</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="8" class="text-center text-muted">Chưa có dữ liệu điểm rèn luyện</td>
+                    <td colspan="7" class="text-center text-muted">Chưa có dữ liệu điểm rèn luyện</td>
                 </tr>
             <?php endif; ?>
         </tbody>
     </table>
 
-    <!-- Delete Confirmation Modal -->
+    <nav aria-label="Phân trang">
+        <ul class="pagination justify-content-center">
+            <?php if ($page > 1): ?>
+                <li class="page-item"><a class="page-link" href="?page=<?= $page - 1 ?>&search=<?= htmlspecialchars($search) ?>">Trang trước</a></li>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <li class="page-item <?= $i == $page ? 'active' : '' ?>"><a class="page-link" href="?page=<?= $i ?>&search=<?= htmlspecialchars($search) ?>"><?= $i ?></a></li>
+            <?php endfor; ?>
+
+            <?php if ($page < $total_pages): ?>
+                <li class="page-item"><a class="page-link" href="?page=<?= $page + 1 ?>&search=<?= htmlspecialchars($search) ?>">Trang sau</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -83,7 +100,7 @@ include __DIR__ . '/header.php';
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Bạn có chắc muốn xóa điểm rèn luyện của đoàn viên <strong id="scoreMemberName"></strong>? Hành động này không thể hoàn tác.
+                    Bạn có chắc muốn xóa điểm rèn luyện <strong id="pointName"></strong>? Hành động này không thể hoàn tác.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -104,8 +121,8 @@ include __DIR__ . '/header.php';
 
     // Show delete confirmation modal
     function showDeleteModal(id, name) {
-        document.getElementById('scoreMemberName').textContent = name;
-        document.getElementById('deleteLink').setAttribute('href', '/BTL/handle/training_score_process.php?action=delete&id=' + id);
+        document.getElementById('pointName').textContent = name;
+        document.getElementById('deleteLink').setAttribute('href', '/BTL/handle/point_process.php?action=delete&id=' + id);
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         deleteModal.show();
     }

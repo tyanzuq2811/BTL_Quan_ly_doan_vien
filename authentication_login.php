@@ -21,9 +21,14 @@ require_once 'functions/auth.php';
           <div class="col-md-8 col-lg-6 col-xxl-3">
             <div class="card mb-0">
               <div class="card-body">
-                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="assets/images/logos/logo-light.svg" alt="">
-                </a>
+                <div class="text-center mb-3">
+                  <a href="authentication_login.php" class="logo-img d-inline-block mx-2">
+                    <img src="assets/images/logos/fitdnu_logo.png" alt="" width="80">
+                  </a>
+                  <a href="authentication_login.php" class="logo-img d-inline-block mx-2">
+                    <img src="assets/images/logos/aiotlab_logo.png" alt="" width="80">
+                  </a>
+                </div>
                 <form action="handle/login_process.php" method="POST">
                   <div class="mb-3">
                     <label for="ten_dang_nhap" class="form-label">Tên đăng nhập</label>

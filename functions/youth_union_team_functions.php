@@ -1,10 +1,7 @@
 <?php
 require_once __DIR__ . '/db_connection.php';
 
-/**
- * Get all teams with chapter names, optionally filtered by search term
- */
-function getAllTeams($search = '') {
+function getAllTeams($search = '', $limit = 10, $offset = 0) {
     $conn = getDbConnection();
     if (!$conn) {
         return [];
@@ -13,11 +10,12 @@ function getAllTeams($search = '') {
             FROM chi_doan cd
             LEFT JOIN lien_chi_doan lcd ON cd.lien_chi_id = lcd.id
             WHERE cd.ten LIKE ? OR lcd.ten LIKE ?
-            ORDER BY cd.id";
+            ORDER BY cd.ngay_thanh_lap DESC
+            LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {
         $searchTerm = '%' . mysqli_real_escape_string($conn, $search) . '%';
-        mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
+        mysqli_stmt_bind_param($stmt, "ssii", $searchTerm, $searchTerm, $limit, $offset);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $teams = [];
@@ -33,9 +31,32 @@ function getAllTeams($search = '') {
     return $teams;
 }
 
-/**
- * Add a new team
- */
+function getTotalTeams($search = '') {
+    $conn = getDbConnection();
+    if (!$conn) {
+        return 0;
+    }
+    $sql = "SELECT COUNT(*) AS total
+            FROM chi_doan cd
+            LEFT JOIN lien_chi_doan lcd ON cd.lien_chi_id = lcd.id
+            WHERE cd.ten LIKE ? OR lcd.ten LIKE ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    if ($stmt) {
+        $searchTerm = '%' . mysqli_real_escape_string($conn, $search) . '%';
+        mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+        $total = $row['total'];
+        mysqli_stmt_close($stmt);
+        mysqli_free_result($result);
+    } else {
+        $total = 0;
+    }
+    mysqli_close($conn);
+    return $total;
+}
+
 function addTeam($ten, $lien_chi_id, $ngay_thanh_lap = null, $trang_thai = 'Hoạt động') {
     $conn = getDbConnection();
     if (!$conn) {
@@ -57,9 +78,6 @@ function addTeam($ten, $lien_chi_id, $ngay_thanh_lap = null, $trang_thai = 'Ho�
     return false;
 }
 
-/**
- * Get team by ID
- */
 function getTeamById($id) {
     $conn = getDbConnection();
     if (!$conn) {
@@ -81,9 +99,6 @@ function getTeamById($id) {
     return null;
 }
 
-/**
- * Update a team
- */
 function updateTeam($id, $ten, $lien_chi_id, $ngay_thanh_lap = null, $trang_thai = 'Hoạt động') {
     $conn = getDbConnection();
     if (!$conn) {
@@ -105,9 +120,6 @@ function updateTeam($id, $ten, $lien_chi_id, $ngay_thanh_lap = null, $trang_thai
     return false;
 }
 
-/**
- * Delete a team
- */
 function deleteTeam($id) {
     $conn = getDbConnection();
     if (!$conn) {
