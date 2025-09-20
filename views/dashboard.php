@@ -1,29 +1,21 @@
 <?php
-// Include file kết nối database - Updated path
 require_once __DIR__ . '/../functions/db_connection.php';
 
-// Lấy kết nối
 $conn = getDbConnection();
 
-// Lấy thống kê tổng quan
 try {
-    // Tổng số đoàn viên
     $result = mysqli_query($conn, "SELECT COUNT(*) as total FROM doan_vien");
     $total_members = mysqli_fetch_assoc($result)['total'];
 
-    // Tổng số chi đoàn
     $result = mysqli_query($conn, "SELECT COUNT(*) as total FROM chi_doan");
     $total_branches = mysqli_fetch_assoc($result)['total'];
 
-    // Tổng số sự kiện
     $result = mysqli_query($conn, "SELECT COUNT(*) as total FROM su_kien");
     $total_events = mysqli_fetch_assoc($result)['total'];
 
-    // Số đoàn viên chưa nộp đoàn phí
     $result = mysqli_query($conn, "SELECT COUNT(*) as total FROM doan_phi WHERE trang_thai = 'Chưa nộp'");
     $unpaid_fees = mysqli_fetch_assoc($result)['total'];
 
-    // Lấy danh sách đoàn viên với thông tin chi tiết
     $members_query = "
         SELECT 
             dv.mssv,
@@ -41,7 +33,6 @@ try {
     ";
     $members = mysqli_query($conn, $members_query);
 
-    // Thống kê theo chi đoàn
     $branch_stats_query = "
         SELECT 
             cd.ten,
@@ -54,7 +45,6 @@ try {
     ";
     $branch_stats = mysqli_query($conn, $branch_stats_query);
 
-    // Lấy sự kiện gần đây
     $events_query = "
         SELECT 
             ten_su_kien,
@@ -67,7 +57,6 @@ try {
     ";
     $recent_events = mysqli_query($conn, $events_query);
 
-    // Lấy thông báo gần đây
     $notifications_query = "
         SELECT 
             tb.tieu_de,
@@ -115,14 +104,14 @@ try {
           <ul id="sidebarnav">
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
-              <span class="hide-menu">Home</span>
+              <span class="hide-menu">Trang chủ</span>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="dashboard.php" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:home-smile-bold-duotone" class="fs-6 d-flex"></iconify-icon>
                 </span>
-                <span class="hide-menu">Dashboard</span>
+                <span class="hide-menu">Bảng quản trị</span>
               </a>
             </li>
             <li class="nav-small-cap">

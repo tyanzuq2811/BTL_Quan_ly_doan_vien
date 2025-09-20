@@ -41,7 +41,7 @@ require_once 'functions/auth.php';
                   <?php if (isset($_SESSION['error'])): ?>
                     <div class="alert alert-danger" role="alert">
                       <?php 
-                      echo $_SESSION['error']; 
+                      echo htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8'); 
                       unset($_SESSION['error']);
                       ?>
                     </div>
@@ -49,7 +49,7 @@ require_once 'functions/auth.php';
                   <?php if (isset($_SESSION['success'])): ?>
                     <div class="alert alert-success" role="alert">
                       <?php 
-                      echo $_SESSION['success']; 
+                      echo htmlspecialchars($_SESSION['success'], ENT_QUOTES, 'UTF-8'); 
                       unset($_SESSION['success']);
                       ?>
                     </div>
