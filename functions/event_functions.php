@@ -18,7 +18,7 @@ function getAllEvents($search = '', $limit = 10, $offset = 0) {
             LEFT JOIN lien_chi_doan lc ON sk.cap_to_chuc = 'LienChi' AND sk.cap_id = lc.id
             LEFT JOIN chi_doan cd ON sk.cap_to_chuc = 'ChiDoan' AND sk.cap_id = cd.id
             WHERE sk.ten_su_kien LIKE ? OR YEAR(sk.ngay_to_chuc) LIKE ?
-            ORDER BY sk.ngay_to_chuc DESC
+            ORDER BY sk.id ASC
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {

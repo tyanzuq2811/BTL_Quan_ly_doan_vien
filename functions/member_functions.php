@@ -11,7 +11,7 @@ function getAllMembers($search = '', $limit = 10, $offset = 0) {
             FROM doan_vien dv
             LEFT JOIN chi_doan cd ON dv.chi_doan_id = cd.id
             WHERE dv.mssv LIKE ? OR dv.ho_ten LIKE ? OR dv.email LIKE ?
-            ORDER BY dv.id
+            ORDER BY dv.id ASC
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {

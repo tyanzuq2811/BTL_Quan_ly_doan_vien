@@ -11,7 +11,7 @@ function getAllChapters($search = '', $limit = 10, $offset = 0) {
             FROM lien_chi_doan lcd
             LEFT JOIN doan_vien dv ON lcd.doan_truong_id = dv.id
             WHERE lcd.ten LIKE ? OR dv.ho_ten LIKE ?
-            ORDER BY lcd.ngay_thanh_lap DESC
+            ORDER BY lcd.id ASC
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {

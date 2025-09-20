@@ -11,7 +11,7 @@ function getAllScores($search = '', $limit = 10, $offset = 0) {
             FROM diem_ren_luyen drl
             JOIN doan_vien dv ON drl.doan_vien_id = dv.id
             WHERE dv.ho_ten LIKE ? OR drl.nam_hoc LIKE ?
-            ORDER BY drl.nam_hoc DESC
+            ORDER BY drl.id ASC
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {

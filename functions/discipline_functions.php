@@ -13,7 +13,7 @@ function getAllDisciplines($search = '', $limit = 10, $offset = 0) {
             JOIN doan_vien dv ON kl.doan_vien_id = dv.id
             JOIN loai_ky_luat lkl ON kl.loai_id = lkl.id
             WHERE dv.ho_ten LIKE ? OR lkl.ten LIKE ?
-            ORDER BY kl.ngay_quyet_dinh DESC
+            ORDER BY kl.id ASC
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {

@@ -14,7 +14,7 @@ function getAllHistories($search = '', $limit = 10, $offset = 0) {
             JOIN doan_vien dv ON lstg.doan_vien_id = dv.id
             JOIN chi_doan cd ON lstg.chi_doan_id = cd.id
             WHERE dv.ho_ten LIKE ? OR cd.ten LIKE ?
-            ORDER BY lstg.ngay_bat_dau DESC
+            ORDER BY lstg.id ASC
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {

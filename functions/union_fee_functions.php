@@ -13,7 +13,7 @@ function getAllFees($search = '', $limit = 10, $offset = 0) {
             JOIN doan_vien dv ON dp.doan_vien_id = dv.id
             JOIN loai_doan_phi ldp ON dp.loai_doan_phi_id = ldp.id
             WHERE dv.ho_ten LIKE ? OR ldp.ten LIKE ?
-            ORDER BY dp.ngay_nop DESC
+            ORDER BY dp.id ASC
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {

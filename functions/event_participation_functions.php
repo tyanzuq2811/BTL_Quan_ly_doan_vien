@@ -13,7 +13,7 @@ function getAllParticipations($search = '', $limit = 10, $offset = 0) {
             JOIN su_kien sk ON tgs.su_kien_id = sk.id
             JOIN doan_vien dv ON tgs.doan_vien_id = dv.id
             WHERE sk.ten_su_kien LIKE ? OR dv.ho_ten LIKE ?
-            ORDER BY tgs.id
+            ORDER BY tgs.id ASC
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {

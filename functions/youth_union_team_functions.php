@@ -10,7 +10,7 @@ function getAllTeams($search = '', $limit = 10, $offset = 0) {
             FROM chi_doan cd
             LEFT JOIN lien_chi_doan lcd ON cd.lien_chi_id = lcd.id
             WHERE cd.ten LIKE ? OR lcd.ten LIKE ?
-            ORDER BY cd.ngay_thanh_lap DESC
+            ORDER BY cd.id ASC
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {

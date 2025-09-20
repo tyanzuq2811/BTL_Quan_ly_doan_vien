@@ -21,7 +21,7 @@ function getAllNotifications($search = '', $limit = 10, $offset = 0) {
             LEFT JOIN lien_chi_doan lc ON tb.cap_to_chuc = 'LienChi' AND tb.cap_id = lc.id
             LEFT JOIN chi_doan cd ON tb.cap_to_chuc = 'ChiDoan' AND tb.cap_id = cd.id
             WHERE tb.tieu_de LIKE ? OR dv.ho_ten LIKE ?
-            ORDER BY tb.ngay_gui DESC
+            ORDER BY tb.id ASC
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {

@@ -13,7 +13,7 @@ function getAllAwards($search = '', $limit = 10, $offset = 0) {
             JOIN doan_vien dv ON kt.doan_vien_id = dv.id
             JOIN loai_khen_thuong lkt ON kt.loai_id = lkt.id
             WHERE dv.ho_ten LIKE ? OR lkt.ten LIKE ?
-            ORDER BY kt.ngay_quyet_dinh DESC
+            ORDER BY kt.id ASC
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {
