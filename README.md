@@ -33,7 +33,9 @@ Hệ thống Quản lý Đoàn viên trong trường Đại học được xây 
 ### Công nghệ chính
 [![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](#)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](#)
+[![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)](#)
+[![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white)](#)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 
 ### Web Server & Database
@@ -48,7 +50,7 @@ Hệ thống Quản lý Đoàn viên trong trường Đại học được xây 
 ## 🚀 3. Hình ảnh các chức năng
 ### Trang đăng nhập
 
-<img width="1904" height="942" alt="image" src="https://github.com/user-attachments/assets/f447c1c7-7688-4d6c-bffd-ee2b776ac916" />
+<img width="1903" height="935" alt="image" src="https://github.com/user-attachments/assets/a8475173-e8b8-4de6-aea2-2809a29e50e7" />
 
 ### Trang xem danh sách tài khoản
 <img width="1888" height="943" alt="image" src="https://github.com/user-attachments/assets/1c7176f3-f662-4dd4-a99e-94474d9c62d2" />
@@ -78,9 +80,9 @@ Clone project về thư mục `htdocs` của XAMPP (ví dụ ổ C):
 
 ```bash
 cd C:\xampp\htdocs
-git clone https://gitlab.com/username/qlsv-doanvien.git
+https://github.com/tyanzuq2811/BTL_Quan_ly_doan_vien.git
 Truy cập project qua đường dẫn:
-👉 http://localhost/qlsv-doanvien
+👉 http://localhost/authentication_login.
 ```
 ### 4.3. Setup database
 Mở XAMPP Control Panel, Start Apache và MySQL
@@ -89,8 +91,8 @@ Truy cập MySQL WorkBench
 Tạo database:
 ```bash
 CREATE DATABASE IF NOT EXISTS quan_ly_doan_vien
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
+   CHARACTER SET utf8mb4
+   COLLATE utf8mb4_unicode_ci;
 ```
 
 ### 4.4. Setup tham số kết nối
@@ -101,7 +103,7 @@ Mở file config.php (hoặc .env) trong project, chỉnh thông tin DB:
     function getDbConnection() {
         $servername = "localhost";
         $username = "root";
-        $password = "Dung@28112005";
+        $password = "";
         $dbname = "quan_ly_doan_vien";
         $port = 3306;
         $conn = mysqli_connect($servername, $username, $password, $dbname, $port);

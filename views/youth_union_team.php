@@ -110,14 +110,12 @@ include __DIR__ . '/header.php';
 </div>
 
 <script>
-    // Clear success/error messages from URL after 2 seconds
     if (window.location.search.includes("success") || window.location.search.includes("error")) {
         setTimeout(() => {
             window.history.replaceState({}, document.title, window.location.pathname + (window.location.search.includes("search") ? "?search=<?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8') ?>" : ""));
         }, 2000);
     }
 
-    // Show delete confirmation modal
     function showDeleteModal(id, name) {
         document.getElementById('teamName').textContent = name;
         document.getElementById('deleteLink').setAttribute('href', '/BTL/handle/youth_union_team_process.php?action=delete&id=' + id);

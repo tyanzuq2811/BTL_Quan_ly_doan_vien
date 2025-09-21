@@ -250,6 +250,7 @@ try {
           </div>
         </nav>
       </header>
+    </div>
       <!--  Header End -->
   <div class="container-fluid">
     <!-- Statistics Cards Row -->
