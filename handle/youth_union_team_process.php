@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? '';
+$action = filter_input(INPUT_GET, 'action', FILTER_DEFAULT) ?? '';
 
 switch ($action) {
     case 'add':
@@ -25,14 +25,14 @@ switch ($action) {
 }
 
 function handleAddTeam() {
-    $ten = filter_input(INPUT_POST, 'ten', FILTER_SANITIZE_STRING) ?? '';
+    $ten = filter_input(INPUT_POST, 'ten', FILTER_DEFAULT) ?? '';
     $lien_chi_id = filter_input(INPUT_POST, 'lien_chi_id', FILTER_VALIDATE_INT) ?? 0;
-    $ngay_thanh_lap = filter_input(INPUT_POST, 'ngay_thanh_lap', FILTER_SANITIZE_STRING) ?? null;
-    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_SANITIZE_STRING) ?? 'Hoạt động';
+    $ngay_thanh_lap = filter_input(INPUT_POST, 'ngay_thanh_lap', FILTER_DEFAULT) ?? null;
+    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_DEFAULT) ?? 'Hoạt động';
 
     if (empty($ten) || $lien_chi_id <= 0) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/youth_union_team_create.php");
+        header("Location: /BTL/views/youth_union_team/youth_union_team_create.php");
         exit();
     }
 
@@ -42,21 +42,21 @@ function handleAddTeam() {
         exit();
     } else {
         $_SESSION['error'] = 'Thêm chi đoàn thất bại';
-        header("Location: /BTL/views/youth_union_team_create.php");
+        header("Location: /BTL/views/youth_union_team/youth_union_team_create.php");
         exit();
     }
 }
 
 function handleEditTeam() {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? 0;
-    $ten = filter_input(INPUT_POST, 'ten', FILTER_SANITIZE_STRING) ?? '';
+    $ten = filter_input(INPUT_POST, 'ten', FILTER_DEFAULT) ?? '';
     $lien_chi_id = filter_input(INPUT_POST, 'lien_chi_id', FILTER_VALIDATE_INT) ?? 0;
-    $ngay_thanh_lap = filter_input(INPUT_POST, 'ngay_thanh_lap', FILTER_SANITIZE_STRING) ?? null;
-    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_SANITIZE_STRING) ?? 'Hoạt động';
+    $ngay_thanh_lap = filter_input(INPUT_POST, 'ngay_thanh_lap', FILTER_DEFAULT) ?? null;
+    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_DEFAULT) ?? 'Hoạt động';
 
     if ($id <= 0 || empty($ten) || $lien_chi_id <= 0) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/youth_union_team_edit.php?id=$id");
+        header("Location: /BTL/views/youth_union_team/youth_union_team_edit.php?id=$id");
         exit();
     }
 
@@ -66,7 +66,7 @@ function handleEditTeam() {
         exit();
     } else {
         $_SESSION['error'] = 'Sửa chi đoàn thất bại';
-        header("Location: /BTL/views/youth_union_team_edit.php?id=$id");
+        header("Location: /BTL/views/youth_union_team/youth_union_team_edit.php?id=$id");
         exit();
     }
 }

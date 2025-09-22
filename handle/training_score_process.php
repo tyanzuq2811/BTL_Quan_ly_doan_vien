@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? '';
+$action = filter_input(INPUT_GET, 'action', FILTER_DEFAULT) ?? '';
 
 switch ($action) {
     case 'add':
@@ -26,15 +26,15 @@ switch ($action) {
 
 function handleAddScore() {
     $doan_vien_id = filter_input(INPUT_POST, 'doan_vien_id', FILTER_VALIDATE_INT) ?? 0;
-    $nam_hoc = filter_input(INPUT_POST, 'nam_hoc', FILTER_SANITIZE_STRING) ?? '';
-    $hoc_ky = filter_input(INPUT_POST, 'hoc_ky', FILTER_SANITIZE_STRING) ?? '';
+    $nam_hoc = filter_input(INPUT_POST, 'nam_hoc', FILTER_DEFAULT) ?? '';
+    $hoc_ky = filter_input(INPUT_POST, 'hoc_ky', FILTER_DEFAULT) ?? '';
     $diem = filter_input(INPUT_POST, 'diem', FILTER_VALIDATE_INT) ?? 0;
-    $xep_loai = filter_input(INPUT_POST, 'xep_loai', FILTER_SANITIZE_STRING) ?? '';
-    $ghi_chu = filter_input(INPUT_POST, 'ghi_chu', FILTER_SANITIZE_STRING) ?? null;
+    $xep_loai = filter_input(INPUT_POST, 'xep_loai', FILTER_DEFAULT) ?? '';
+    $ghi_chu = filter_input(INPUT_POST, 'ghi_chu', FILTER_DEFAULT) ?? null;
 
     if ($doan_vien_id <= 0 || empty($nam_hoc) || empty($hoc_ky) || $diem < 0 || $diem > 100 || empty($xep_loai)) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/training_score_create.php");
+        header("Location: /BTL/views/training_score/training_score_create.php");
         exit();
     }
 
@@ -44,7 +44,7 @@ function handleAddScore() {
         exit();
     } else {
         $_SESSION['error'] = 'Thêm điểm rèn luyện thất bại. Có thể điểm cho học kỳ này đã tồn tại.';
-        header("Location: /BTL/views/training_score_create.php");
+        header("Location: /BTL/views/training_score/training_score_create.php");
         exit();
     }
 }
@@ -52,15 +52,15 @@ function handleAddScore() {
 function handleEditScore() {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? 0;
     $doan_vien_id = filter_input(INPUT_POST, 'doan_vien_id', FILTER_VALIDATE_INT) ?? 0;
-    $nam_hoc = filter_input(INPUT_POST, 'nam_hoc', FILTER_SANITIZE_STRING) ?? '';
-    $hoc_ky = filter_input(INPUT_POST, 'hoc_ky', FILTER_SANITIZE_STRING) ?? '';
+    $nam_hoc = filter_input(INPUT_POST, 'nam_hoc', FILTER_DEFAULT) ?? '';
+    $hoc_ky = filter_input(INPUT_POST, 'hoc_ky', FILTER_DEFAULT) ?? '';
     $diem = filter_input(INPUT_POST, 'diem', FILTER_VALIDATE_INT) ?? 0;
-    $xep_loai = filter_input(INPUT_POST, 'xep_loai', FILTER_SANITIZE_STRING) ?? '';
-    $ghi_chu = filter_input(INPUT_POST, 'ghi_chu', FILTER_SANITIZE_STRING) ?? null;
+    $xep_loai = filter_input(INPUT_POST, 'xep_loai', FILTER_DEFAULT) ?? '';
+    $ghi_chu = filter_input(INPUT_POST, 'ghi_chu', FILTER_DEFAULT) ?? null;
 
     if ($id <= 0 || $doan_vien_id <= 0 || empty($nam_hoc) || empty($hoc_ky) || $diem < 0 || $diem > 100 || empty($xep_loai)) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/training_score_edit.php?id=$id");
+        header("Location: /BTL/views/training_score/training_score_edit.php?id=$id");
         exit();
     }
 
@@ -70,7 +70,7 @@ function handleEditScore() {
         exit();
     } else {
         $_SESSION['error'] = 'Sửa điểm rèn luyện thất bại. Có thể điểm cho học kỳ này đã tồn tại cho đoàn viên khác.';
-        header("Location: /BTL/views/training_score_edit.php?id=$id");
+        header("Location: /BTL/views/training_score/training_score_edit.php?id=$id");
         exit();
     }
 }

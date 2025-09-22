@@ -45,9 +45,8 @@ function handleEditAccount() {
     $trang_thai = trim(filter_input(INPUT_POST, 'trang_thai', FILTER_DEFAULT) ?? '');
 
     $current_account = getAccountById($id);
-    $new_password = $mat_khau ?: $current_account['mat_khau']; // Giữ mật khẩu cũ nếu không nhập mới
+    $new_password = $mat_khau ?: $current_account['mat_khau']; 
 
-    // Kiểm tra username đã tồn tại (trừ tài khoản hiện tại)
     if (usernameExists($ten_dang_nhap) && $current_account['ten_dang_nhap'] !== $ten_dang_nhap) {
         $_SESSION['error'] = 'Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.';
         header('Location: /BTL/views/account/account_edit.php?id=' . $id);

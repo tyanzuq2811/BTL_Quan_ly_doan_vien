@@ -21,9 +21,10 @@ $teams = getAllTeams();
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
         <aside class="left-sidebar">
             <div>
-                <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="/BTL/views/dashboard.php" class="text-nowrap logo-img">
-                        <img src="/BTL/assets/images/logos/logo-light.svg" alt="">
+                <div class="brand-logo d-flex align-items-center justify-content-center">
+                    <a href="dashboard.php" class="text-nowrap logo-img">
+                        <img src="/BTL/assets/images/logos/fitdnu_logo.png" alt="" width="80"/>
+                        <img src="/BTL/assets/images/logos/aiotlab_logo.png" alt="" width="80" style="margin-left:22px;"/>
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>

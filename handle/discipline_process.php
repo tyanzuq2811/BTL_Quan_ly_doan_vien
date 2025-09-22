@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? '';
+$action = filter_input(INPUT_GET, 'action', FILTER_DEFAULT) ?? '';
 
 switch ($action) {
     case 'add':
@@ -27,12 +27,12 @@ switch ($action) {
 function handleAddDiscipline() {
     $doan_vien_id = filter_input(INPUT_POST, 'doan_vien_id', FILTER_VALIDATE_INT) ?? 0;
     $loai_id = filter_input(INPUT_POST, 'loai_id', FILTER_VALIDATE_INT) ?? 0;
-    $ngay_quyet_dinh = filter_input(INPUT_POST, 'ngay_quyet_dinh', FILTER_SANITIZE_STRING) ?? '';
-    $noi_dung = filter_input(INPUT_POST, 'noi_dung', FILTER_SANITIZE_STRING) ?? null;
+    $ngay_quyet_dinh = filter_input(INPUT_POST, 'ngay_quyet_dinh', FILTER_DEFAULT) ?? '';
+    $noi_dung = filter_input(INPUT_POST, 'noi_dung', FILTER_DEFAULT) ?? null;
 
     if ($doan_vien_id <= 0 || $loai_id <= 0 || empty($ngay_quyet_dinh)) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/discipline_create.php");
+        header("Location: /BTL/views/discipline/discipline_create.php");
         exit();
     }
 
@@ -42,7 +42,7 @@ function handleAddDiscipline() {
         exit();
     } else {
         $_SESSION['error'] = 'Thêm kỷ luật thất bại';
-        header("Location: /BTL/views/discipline_create.php");
+        header("Location: /BTL/views/discipline/discipline_create.php");
         exit();
     }
 }
@@ -51,12 +51,12 @@ function handleEditDiscipline() {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? 0;
     $doan_vien_id = filter_input(INPUT_POST, 'doan_vien_id', FILTER_VALIDATE_INT) ?? 0;
     $loai_id = filter_input(INPUT_POST, 'loai_id', FILTER_VALIDATE_INT) ?? 0;
-    $ngay_quyet_dinh = filter_input(INPUT_POST, 'ngay_quyet_dinh', FILTER_SANITIZE_STRING) ?? '';
-    $noi_dung = filter_input(INPUT_POST, 'noi_dung', FILTER_SANITIZE_STRING) ?? null;
+    $ngay_quyet_dinh = filter_input(INPUT_POST, 'ngay_quyet_dinh', FILTER_DEFAULT) ?? '';
+    $noi_dung = filter_input(INPUT_POST, 'noi_dung', FILTER_DEFAULT) ?? null;
 
     if ($id <= 0 || $doan_vien_id <= 0 || $loai_id <= 0 || empty($ngay_quyet_dinh)) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/discipline_edit.php?id=$id");
+        header("Location: /BTL/views/discipline/discipline_edit.php?id=$id");
         exit();
     }
 
@@ -66,7 +66,7 @@ function handleEditDiscipline() {
         exit();
     } else {
         $_SESSION['error'] = 'Sửa kỷ luật thất bại';
-        header("Location: /BTL/views/discipline_edit.php?id=$id");
+        header("Location: /BTL/views/discipline/discipline_edit.php?id=$id");
         exit();
     }
 }

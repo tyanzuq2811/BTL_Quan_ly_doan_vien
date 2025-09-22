@@ -12,7 +12,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $conn = getDbConnection();
-    $ten_dang_nhap = filter_input(INPUT_POST, 'ten_dang_nhap', FILTER_SANITIZE_STRING) ?? '';
+    $ten_dang_nhap = filter_input(INPUT_POST, 'ten_dang_nhap', FILTER_DEFAULT) ?? '';
     $mat_khau = $_POST['mat_khau'] ?? ''; 
 
     if (empty($ten_dang_nhap) || empty($mat_khau)) {

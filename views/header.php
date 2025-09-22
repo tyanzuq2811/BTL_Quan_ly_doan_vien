@@ -14,9 +14,10 @@
     data-sidebar-position="fixed" data-header-position="fixed">
     <aside class="left-sidebar">
       <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
+        <div class="brand-logo d-flex align-items-center justify-content-center">
           <a href="dashboard.php" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/logo-light.svg" alt="" />
+            <img src="../assets/images/logos/fitdnu_logo.png" alt="" width="80"/>
+            <img src="../assets/images/logos/aiotlab_logo.png" alt="" width="80" style="margin-left:22px;"/>
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>

@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? '';
+$action = filter_input(INPUT_GET, 'action', FILTER_DEFAULT) ?? '';
 
 switch ($action) {
     case 'add':
@@ -27,13 +27,13 @@ switch ($action) {
 function handleAddHistory() {
     $doan_vien_id = filter_input(INPUT_POST, 'doan_vien_id', FILTER_VALIDATE_INT) ?? 0;
     $chi_doan_id = filter_input(INPUT_POST, 'chi_doan_id', FILTER_VALIDATE_INT) ?? 0;
-    $ngay_bat_dau = filter_input(INPUT_POST, 'ngay_bat_dau', FILTER_SANITIZE_STRING) ?? '';
-    $ngay_ket_thuc = filter_input(INPUT_POST, 'ngay_ket_thuc', FILTER_SANITIZE_STRING) ?? null;
-    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_SANITIZE_STRING) ?? 'Đang sinh hoạt';
+    $ngay_bat_dau = filter_input(INPUT_POST, 'ngay_bat_dau', FILTER_DEFAULT) ?? '';
+    $ngay_ket_thuc = filter_input(INPUT_POST, 'ngay_ket_thuc', FILTER_DEFAULT) ?? null;
+    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_DEFAULT) ?? 'Đang sinh hoạt';
 
     if ($doan_vien_id <= 0 || $chi_doan_id <= 0 || empty($ngay_bat_dau)) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/participation_history_create.php");
+        header("Location: /BTL/views/participation_history/participation_history_create.php");
         exit();
     }
 
@@ -43,7 +43,7 @@ function handleAddHistory() {
         exit();
     } else {
         $_SESSION['error'] = 'Thêm lịch sử tham gia thất bại';
-        header("Location: /BTL/views/participation_history_create.php");
+        header("Location: /BTL/views/participation_history/participation_history_create.php");
         exit();
     }
 }
@@ -52,13 +52,13 @@ function handleEditHistory() {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? 0;
     $doan_vien_id = filter_input(INPUT_POST, 'doan_vien_id', FILTER_VALIDATE_INT) ?? 0;
     $chi_doan_id = filter_input(INPUT_POST, 'chi_doan_id', FILTER_VALIDATE_INT) ?? 0;
-    $ngay_bat_dau = filter_input(INPUT_POST, 'ngay_bat_dau', FILTER_SANITIZE_STRING) ?? '';
-    $ngay_ket_thuc = filter_input(INPUT_POST, 'ngay_ket_thuc', FILTER_SANITIZE_STRING) ?? null;
-    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_SANITIZE_STRING) ?? 'Đang sinh hoạt';
+    $ngay_bat_dau = filter_input(INPUT_POST, 'ngay_bat_dau', FILTER_DEFAULT) ?? '';
+    $ngay_ket_thuc = filter_input(INPUT_POST, 'ngay_ket_thuc', FILTER_DEFAULT) ?? null;
+    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_DEFAULT) ?? 'Đang sinh hoạt';
 
     if ($id <= 0 || $doan_vien_id <= 0 || $chi_doan_id <= 0 || empty($ngay_bat_dau)) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/participation_history_edit.php?id=$id");
+        header("Location: /BTL/views/participation_history/participation_history_edit.php?id=$id");
         exit();
     }
 
@@ -68,7 +68,7 @@ function handleEditHistory() {
         exit();
     } else {
         $_SESSION['error'] = 'Sửa lịch sử tham gia thất bại';
-        header("Location: /BTL/views/participation_history_edit.php?id=$id");
+        header("Location: /BTL/views/participation_history/participation_history_edit.php?id=$id");
         exit();
     }
 }

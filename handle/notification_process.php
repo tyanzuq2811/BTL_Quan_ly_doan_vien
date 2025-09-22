@@ -33,13 +33,13 @@ function handleAddNotification() {
 
     if (empty($tieu_de) || empty($noi_dung) || empty($cap_to_chuc) || $cap_id <= 0) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/notification_create.php");
+        header("Location: /BTL/views/notification/notification_create.php");
         exit();
     }
 
     if (!in_array($cap_to_chuc, ['DoanTruong', 'LienChi', 'ChiDoan'])) {
         $_SESSION['error'] = 'Cấp tổ chức không hợp lệ';
-        header("Location: /BTL/views/notification_create.php");
+        header("Location: /BTL/views/notification/notification_create.php");
         exit();
     }
 
@@ -49,7 +49,7 @@ function handleAddNotification() {
         exit();
     } else {
         $_SESSION['error'] = 'Thêm thông báo thất bại';
-        header("Location: /BTL/views/notification_create.php");
+        header("Location: /BTL/views/notification/notification_create.php");
         exit();
     }
 }
@@ -64,13 +64,13 @@ function handleEditNotification() {
 
     if ($id <= 0 || empty($tieu_de) || empty($noi_dung) || empty($cap_to_chuc) || $cap_id <= 0) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/notification_edit.php?id=$id");
+        header("Location: /BTL/views/notification/notification_edit.php?id=$id");
         exit();
     }
 
     if (!in_array($cap_to_chuc, ['DoanTruong', 'LienChi', 'ChiDoan'])) {
         $_SESSION['error'] = 'Cấp tổ chức không hợp lệ';
-        header("Location: /BTL/views/notification_edit.php?id=$id");
+        header("Location: /BTL/views/notification/notification_edit.php?id=$id");
         exit();
     }
 
@@ -80,7 +80,7 @@ function handleEditNotification() {
         exit();
     } else {
         $_SESSION['error'] = 'Sửa thông báo thất bại';
-        header("Location: /BTL/views/notification_edit.php?id=$id");
+        header("Location: /BTL/views/notification/notification_edit.php?id=$id");
         exit();
     }
 }

@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? '';
+$action = filter_input(INPUT_GET, 'action', FILTER_DEFAULT) ?? '';
 
 switch ($action) {
     case 'add':
@@ -25,10 +25,10 @@ switch ($action) {
 }
 
 function handleAddChapter() {
-    $ten = filter_input(INPUT_POST, 'ten', FILTER_SANITIZE_STRING) ?? '';
+    $ten = filter_input(INPUT_POST, 'ten', FILTER_DEFAULT) ?? '';
     $doan_truong_id = filter_input(INPUT_POST, 'doan_truong_id', FILTER_VALIDATE_INT) ?? null;
-    $ngay_thanh_lap = filter_input(INPUT_POST, 'ngay_thanh_lap', FILTER_SANITIZE_STRING) ?? null;
-    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_SANITIZE_STRING) ?? 'Hoạt động';
+    $ngay_thanh_lap = filter_input(INPUT_POST, 'ngay_thanh_lap', FILTER_DEFAULT) ?? null;
+    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_DEFAULT) ?? 'Hoạt động';
 
     if (empty($ten)) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
@@ -49,10 +49,10 @@ function handleAddChapter() {
 
 function handleEditChapter() {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? 0;
-    $ten = filter_input(INPUT_POST, 'ten', FILTER_SANITIZE_STRING) ?? '';
+    $ten = filter_input(INPUT_POST, 'ten', FILTER_DEFAULT) ?? '';
     $doan_truong_id = filter_input(INPUT_POST, 'doan_truong_id', FILTER_VALIDATE_INT) ?? null;
-    $ngay_thanh_lap = filter_input(INPUT_POST, 'ngay_thanh_lap', FILTER_SANITIZE_STRING) ?? null;
-    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_SANITIZE_STRING) ?? 'Hoạt động';
+    $ngay_thanh_lap = filter_input(INPUT_POST, 'ngay_thanh_lap', FILTER_DEFAULT) ?? null;
+    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_DEFAULT) ?? 'Hoạt động';
 
     if ($id <= 0 || empty($ten)) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';

@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? '';
+$action = filter_input(INPUT_GET, 'action', FILTER_DEFAULT) ?? '';
 
 switch ($action) {
     case 'add':
@@ -27,11 +27,11 @@ switch ($action) {
 function handleAddParticipation() {
     $su_kien_id = filter_input(INPUT_POST, 'su_kien_id', FILTER_VALIDATE_INT) ?? 0;
     $doan_vien_id = filter_input(INPUT_POST, 'doan_vien_id', FILTER_VALIDATE_INT) ?? 0;
-    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_SANITIZE_STRING) ?? 'Đã đăng ký';
+    $trang_thai = filter_input(INPUT_POST, 'trang_thai', FILTER_DEFAULT) ?? 'Đã đăng ký';
 
     if ($su_kien_id <= 0 || $doan_vien_id <= 0) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/event_participation_create.php");
+        header("Location: /BTL/views/event_participation/event_participation_create.php");
         exit();
     }
 
@@ -41,7 +41,7 @@ function handleAddParticipation() {
         exit();
     } else {
         $_SESSION['error'] = 'Thêm tham gia sự kiện thất bại. Có thể bản ghi đã tồn tại.';
-        header("Location: /BTL/views/event_participation_create.php");
+        header("Location: /BTL/views/event_participation/event_participation_create.php");
         exit();
     }
 }
@@ -54,7 +54,7 @@ function handleEditParticipation() {
 
     if ($id <= 0 || $su_kien_id <= 0 || $doan_vien_id <= 0) {
         $_SESSION['error'] = 'Dữ liệu không hợp lệ';
-        header("Location: /BTL/views/event_participation_edit.php?id=$id");
+        header("Location: /BTL/views/event_participation/event_participation_edit.php?id=$id");
         exit();
     }
 
@@ -64,7 +64,7 @@ function handleEditParticipation() {
         exit();
     } else {
         $_SESSION['error'] = 'Sửa tham gia sự kiện thất bại. Có thể bản ghi đã tồn tại.';
-        header("Location: /BTL/views/event_participation_edit.php?id=$id");
+        header("Location: /BTL/views/event_participation/event_participation_edit.php?id=$id");
         exit();
     }
 }

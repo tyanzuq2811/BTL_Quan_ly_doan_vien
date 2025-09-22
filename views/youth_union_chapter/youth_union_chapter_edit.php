@@ -36,14 +36,15 @@ if (!$chapter) {
     <aside class="left-sidebar">
       <!-- Sidebar scroll-->
       <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.html" class="text-nowrap logo-img">
-            <img src="/BTL/assets/images/logos/logo-light.svg" alt="" />
+        <div class="brand-logo d-flex align-items-center justify-content-center">
+          <a href="dashboard.php" class="text-nowrap logo-img">
+            <img src="/BTL/assets/images/logos/fitdnu_logo.png" alt="" width="80"/>
+            <img src="/BTL/assets/images/logos/aiotlab_logo.png" alt="" width="80" style="margin-left:22px;"/>
           </a>
-          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+        <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
-          </div>
         </div>
+      </div>
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">

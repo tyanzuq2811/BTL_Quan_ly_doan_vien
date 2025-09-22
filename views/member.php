@@ -38,7 +38,7 @@ include __DIR__ . '/header.php';
         </div>
     </form>
 
-    <a href="/BTL/views/doan_vien/member_create.php" class="btn btn-primary mb-3">Thêm đoàn viên</a>
+    <a href="/BTL/views/member/member_create.php" class="btn btn-primary mb-3">Thêm đoàn viên</a>
 
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
@@ -73,7 +73,7 @@ include __DIR__ . '/header.php';
                         <td><?= htmlspecialchars($member['chi_doan_ten'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars($member['trang_thai'], ENT_QUOTES, 'UTF-8') ?></td>
                         <td>
-                            <a href="/BTL/views/doan_vien/member_edit.php?id=<?= htmlspecialchars($member['id'], ENT_QUOTES, 'UTF-8') ?>" class="btn btn-warning btn-sm">Sửa</a>
+                            <a href="/BTL/views/member/member_edit.php?id=<?= htmlspecialchars($member['id'], ENT_QUOTES, 'UTF-8') ?>" class="btn btn-warning btn-sm">Sửa</a>
                             <button class="btn btn-danger btn-sm" onclick="showDeleteModal(<?= htmlspecialchars($member['id'], ENT_QUOTES, 'UTF-8') ?>, '<?= htmlspecialchars($member['ho_ten'], ENT_QUOTES, 'UTF-8') ?>')">Xóa</button>
                         </td>
                     </tr>
