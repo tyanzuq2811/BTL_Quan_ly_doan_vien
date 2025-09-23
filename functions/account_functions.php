@@ -6,10 +6,11 @@ function getAllAccounts($search = '', $limit = 10, $offset = 0) {
     if (!$conn) {
         return [];
     }
-    $sql = "SELECT id, doan_vien_id, ten_dang_nhap, vai_tro, trang_thai
-            FROM tai_khoan
-            WHERE ten_dang_nhap LIKE ?
-            ORDER BY id
+    $sql = "SELECT t.id, d.ho_ten, t.ten_dang_nhap, t.vai_tro, t.trang_thai
+            FROM tai_khoan t
+            LEFT JOIN doan_vien d ON t.doan_vien_id = d.id
+            WHERE t.ten_dang_nhap LIKE ?
+            ORDER BY t.id
             LIMIT ? OFFSET ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {
@@ -82,7 +83,10 @@ function getAccountById($id) {
     if (!$conn) {
         return null;
     }
-    $sql = "SELECT id, doan_vien_id, ten_dang_nhap, vai_tro, trang_thai FROM tai_khoan WHERE id = ? LIMIT 1";
+    $sql = "SELECT t.id, d.ho_ten, t.ten_dang_nhap, t.vai_tro, t.trang_thai
+            FROM tai_khoan t
+            LEFT JOIN doan_vien d ON t.doan_vien_id = d.id
+            WHERE t.id = ? LIMIT 1";
     $stmt = mysqli_prepare($conn, $sql);
 
     if ($stmt) {

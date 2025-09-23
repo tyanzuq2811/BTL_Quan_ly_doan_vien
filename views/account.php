@@ -125,10 +125,10 @@ $total_pages = ceil($total_accounts / $limit);
         </nav>
       </header>
     </div>
-    <div class="body-wrapper">
-      <div class="container mt-3">
+    <div class="body-wrapper d-flex flex-column min-vh-100">
+      <div class="container mt-6 flex-grow-1"> 
         <div class="row justify-content-center">
-          <div class="col-md-11">
+          <div class="col-md-11 p-4 bg-white shadow-sm rounded">
             <h3 class="mt-3 mb-4">Danh sách tài khoản</h3>
 
             <?php if (isset($_SESSION['success'])): ?>
@@ -160,7 +160,7 @@ $total_pages = ceil($total_accounts / $limit);
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Mã thành viên</th>
+                        <th scope="col">Tên thành viên</th>
                         <th scope="col">Tên đăng nhập</th>
                         <th scope="col">Vai trò</th>
                         <th scope="col">Trạng thái</th>
@@ -172,7 +172,7 @@ $total_pages = ceil($total_accounts / $limit);
                         <?php foreach ($accounts as $account): ?>
                             <tr>
                                 <td><?= htmlspecialchars($account['id'], ENT_QUOTES, 'UTF-8') ?></td>
-                                <td><?= htmlspecialchars($account['doan_vien_id'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
+                                <td><?= htmlspecialchars($account['ho_ten'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
                                 <td><?= htmlspecialchars($account['ten_dang_nhap'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td><?= htmlspecialchars($account['vai_tro'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td><?= htmlspecialchars($account['trang_thai'], ENT_QUOTES, 'UTF-8') ?></td>
