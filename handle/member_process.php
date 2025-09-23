@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../functions/db_connection.php'; // Thay bằng đường dẫn chuẩn nếu khác
+require_once __DIR__ . '/../functions/db_connection.php'; 
 require_once __DIR__ . '/../functions/member_functions.php';
 
 ini_set('display_errors', 1);

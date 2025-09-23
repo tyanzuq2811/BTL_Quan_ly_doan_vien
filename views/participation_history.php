@@ -3,7 +3,7 @@ require_once __DIR__ . '/../functions/auth.php';
 require_once __DIR__ . '/../functions/participation_history_functions.php';
 
 checkLogin(__DIR__ . '/../authentication_login.php');
-$search = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING) ?? '';
+$search = filter_input(INPUT_GET, 'search', FILTER_DEFAULT) ?? '';
 $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ?? 1;
 $limit = 10; 
 $offset = ($page - 1) * $limit;

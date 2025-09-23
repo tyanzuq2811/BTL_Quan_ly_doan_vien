@@ -4,7 +4,7 @@ require_once __DIR__ . '/../functions/auth.php';
 require_once __DIR__ . '/../functions/account_functions.php';
 
 checkLogin(__DIR__ . '/../authentication_login.php');
-$search = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING) ?? '';
+$search = filter_input(INPUT_GET, 'search', FILTER_DEFAULT) ?? '';
 $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ?? 1;
 $limit = 10;
 $offset = ($page - 1) * $limit;
@@ -31,12 +31,13 @@ $total_pages = ceil($total_accounts / $limit);
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-center">
           <a href="dashboard.php" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/fitdnu_logo.png" alt="" width="80"/>
+            <img src="/BTL/assets/images/logos/fitdnu_logo.png" alt="" width="80"/>
+            <img src="/BTL/assets/images/logos/aiotlab_logo.png" alt="" width="80" style="margin-left:22px;"/>
           </a>
-          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-            <i class="ti ti-x fs-8"></i>
-          </div>
+        <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+          <i class="ti ti-x fs-8"></i>
         </div>
+      </div>
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
             <li class="nav-small-cap">

@@ -61,7 +61,7 @@ function addAccount($doan_vien_id, $ten_dang_nhap, $mat_khau, $vai_tro = 'DoanVi
         return false;
     }
     $ten_dang_nhap = mysqli_real_escape_string($conn, $ten_dang_nhap);
-    $mat_khau = password_hash($mat_khau, PASSWORD_DEFAULT); // Hash mật khẩu
+    $mat_khau = password_hash($mat_khau, PASSWORD_DEFAULT); 
     $sql = "INSERT INTO tai_khoan (doan_vien_id, ten_dang_nhap, mat_khau, vai_tro, trang_thai) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
 
@@ -141,7 +141,7 @@ function deleteAccount($id) {
 }
 
 function usernameExists($username) {
-    $conn = getDbConnection(); // Lấy kết nối từ hàm
+    $conn = getDbConnection();  
     $stmt = $conn->prepare("SELECT COUNT(*) FROM tai_khoan WHERE ten_dang_nhap = ?");
     if ($stmt === false) {
         die("Lỗi prepare: " . $conn->error);
@@ -151,7 +151,7 @@ function usernameExists($username) {
     $stmt->bind_result($count);
     $stmt->fetch();
     $stmt->close();
-    $conn->close(); // Đóng kết nối sau khi sử dụng
+    $conn->close(); 
     return $count > 0;
 }
 ?>
