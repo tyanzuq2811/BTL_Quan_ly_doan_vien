@@ -49,9 +49,7 @@ Hệ thống Quản lý Đoàn viên trong trường Đại học được xây 
 
 ## 🚀 3. Hình ảnh các chức năng
 ### Trang đăng nhập
-
-<img width="1903" height="935" alt="image" src="https://github.com/user-attachments/assets/a8475173-e8b8-4de6-aea2-2809a29e50e7" />
-
+<img width="1902" height="931" alt="image" src="https://github.com/user-attachments/assets/c982cf12-24f8-4137-8ad4-d6c8768c5e54" />
 ### Trang xem danh sách tài khoản
 <img width="1888" height="943" alt="image" src="https://github.com/user-attachments/assets/1c7176f3-f662-4dd4-a99e-94474d9c62d2" />
 ### Trang xem tổ chức đoàn 
