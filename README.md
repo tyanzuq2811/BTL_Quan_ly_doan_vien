@@ -55,7 +55,7 @@ Hệ thống Quản lý Đoàn viên trong trường Đại học được xây 
 ### Trang dashboard cán bộ 
 <img width="1886" height="940" alt="image" src="https://github.com/user-attachments/assets/486fc55b-6c61-46e6-9c92-ca52ad7ad1b2" />
 ### Trang dashboard đoàn viên     
-<img width="1888" height="949" alt="image" src="https://github.com/user-attachments/assets/66e4c8b4-c39f-4dc1-a472-ef7e569f35c4" />
+<img width="1890" height="932" alt="image" src="https://github.com/user-attachments/assets/2b5e861a-8a59-4505-8149-4ceb1ec6b503" />
 ### Trang quản lý liên chi đoàn 
 <img width="1901" height="939" alt="image" src="https://github.com/user-attachments/assets/f3c88b32-5c7e-4911-b977-303523e5e4e3" />
 ### Trang quản lý chi đoàn
