@@ -61,14 +61,30 @@ function addAccount($doan_vien_id, $ten_dang_nhap, $mat_khau, $vai_tro = 'DoanVi
     if (!$conn) {
         return false;
     }
+
+    if (!empty($doan_vien_id)) {
+        $checkSql = "SELECT COUNT(*) as cnt FROM doan_vien WHERE id = ?";
+        $checkStmt = mysqli_prepare($conn, $checkSql);
+        mysqli_stmt_bind_param($checkStmt, "i", $doan_vien_id);
+        mysqli_stmt_execute($checkStmt);
+        $result = mysqli_stmt_get_result($checkStmt);
+        $row = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($checkStmt);
+
+        if ($row['cnt'] == 0) {
+            mysqli_close($conn);
+            return false; 
+        }
+    }
+
     $ten_dang_nhap = mysqli_real_escape_string($conn, $ten_dang_nhap);
-    $mat_khau = password_hash($mat_khau, PASSWORD_DEFAULT); 
+    $hashed_password = password_hash($mat_khau, PASSWORD_DEFAULT);
     $sql = "INSERT INTO tai_khoan (doan_vien_id, ten_dang_nhap, mat_khau, vai_tro, trang_thai) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
 
     if ($stmt) {
         $doan_vien_id = empty($doan_vien_id) ? null : $doan_vien_id;
-        mysqli_stmt_bind_param($stmt, "issss", $doan_vien_id, $ten_dang_nhap, $mat_khau, $vai_tro, $trang_thai);
+        mysqli_stmt_bind_param($stmt, "issss", $doan_vien_id, $ten_dang_nhap, $hashed_password, $vai_tro, $trang_thai);
         $success = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
@@ -107,14 +123,30 @@ function updateAccount($id, $doan_vien_id, $ten_dang_nhap, $mat_khau, $vai_tro =
     if (!$conn) {
         return false;
     }
+
+    if (!empty($doan_vien_id)) {
+        $checkSql = "SELECT COUNT(*) as cnt FROM doan_vien WHERE id = ?";
+        $checkStmt = mysqli_prepare($conn, $checkSql);
+        mysqli_stmt_bind_param($checkStmt, "i", $doan_vien_id);
+        mysqli_stmt_execute($checkStmt);
+        $result = mysqli_stmt_get_result($checkStmt);
+        $row = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($checkStmt);
+
+        if ($row['cnt'] == 0) {
+            mysqli_close($conn);
+            return false; 
+        }
+    }
+
     $ten_dang_nhap = mysqli_real_escape_string($conn, $ten_dang_nhap);
-    $mat_khau = !empty($mat_khau) ? password_hash($mat_khau, PASSWORD_DEFAULT) : null; // Chỉ hash nếu có mật khẩu mới
+    $hashed_password = !empty($mat_khau) ? password_hash($mat_khau, PASSWORD_DEFAULT) : null;
     $sql = "UPDATE tai_khoan SET doan_vien_id = ?, ten_dang_nhap = ?, mat_khau = ?, vai_tro = ?, trang_thai = ? WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
 
     if ($stmt) {
         $doan_vien_id = empty($doan_vien_id) ? null : $doan_vien_id;
-        $mat_khau = $mat_khau ?: null; 
+        $mat_khau = $hashed_password ?: null; 
         mysqli_stmt_bind_param($stmt, "issssi", $doan_vien_id, $ten_dang_nhap, $mat_khau, $vai_tro, $trang_thai, $id);
         $success = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);

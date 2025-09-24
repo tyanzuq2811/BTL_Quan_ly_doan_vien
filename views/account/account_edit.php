@@ -52,12 +52,11 @@ if (!$account) {
                             <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
                             <span class="hide-menu">Danh mục quản lý</span>
                         </li>
-                         <a class="sidebar-link" href="account.php" aria-expanded="false">
-                            <span>
-                            <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6"></iconify-icon>
-                            </span>
-                            <span class="hide-menu">Quản lý tài khoản</span>
-                        </a>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="account.php" aria-expanded="false">
+                                <span><iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6"></iconify-icon></span>
+                                <span class="hide-menu">Quản lý tài khoản</span>
+                            </a>
                         </li>
                         <li class="nav-small-cap">
                             <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-6"></iconify-icon>

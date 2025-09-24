@@ -1,79 +1,22 @@
 <?php
 require_once __DIR__ . '/../functions/db_connection.php';
-
-$conn = getDbConnection();
+require_once __DIR__ . '/../functions/dashboard_functions.php';
 
 try {
-    $result = mysqli_query($conn, "SELECT COUNT(*) as total FROM doan_vien");
-    $total_members = mysqli_fetch_assoc($result)['total'];
-
-    $result = mysqli_query($conn, "SELECT COUNT(*) as total FROM chi_doan");
-    $total_branches = mysqli_fetch_assoc($result)['total'];
-
-    $result = mysqli_query($conn, "SELECT COUNT(*) as total FROM su_kien");
-    $total_events = mysqli_fetch_assoc($result)['total'];
-
-    $result = mysqli_query($conn, "SELECT COUNT(*) as total FROM doan_phi WHERE trang_thai = 'Chưa nộp'");
-    $unpaid_fees = mysqli_fetch_assoc($result)['total'];
-
-    $members_query = "
-        SELECT 
-            dv.mssv,
-            dv.ho_ten,
-            dv.email,
-            cd.ten as chi_doan,
-            COALESCE(drl.diem, 0) as diem,
-            COALESCE(drl.xep_loai, 'Chưa đánh giá') as xep_loai,
-            COALESCE(dp.trang_thai, 'Chưa có') as trang_thai_doan_phi
-        FROM doan_vien dv
-        LEFT JOIN chi_doan cd ON dv.chi_doan_id = cd.id
-        LEFT JOIN diem_ren_luyen drl ON dv.id = drl.doan_vien_id
-        LEFT JOIN doan_phi dp ON dv.id = dp.doan_vien_id
-        ORDER BY dv.mssv
-    ";
-    $members = mysqli_query($conn, $members_query);
-
-    $branch_stats_query = "
-        SELECT 
-            cd.ten,
-            COUNT(dv.id) as so_thanh_vien,
-            ROUND((COUNT(dv.id) * 100.0 / (SELECT COUNT(*) FROM doan_vien)), 1) as ti_le
-        FROM chi_doan cd
-        LEFT JOIN doan_vien dv ON cd.id = dv.chi_doan_id
-        GROUP BY cd.id, cd.ten
-        ORDER BY so_thanh_vien DESC
-    ";
-    $branch_stats = mysqli_query($conn, $branch_stats_query);
-
-    $events_query = "
-        SELECT 
-            ten_su_kien,
-            mo_ta,
-            DATE_FORMAT(ngay_to_chuc, '%d/%m/%Y') as ngay_to_chuc_formatted,
-            cap_to_chuc
-        FROM su_kien 
-        ORDER BY ngay_to_chuc DESC 
-        LIMIT 3
-    ";
-    $recent_events = mysqli_query($conn, $events_query);
-
-    $notifications_query = "
-        SELECT 
-            tb.tieu_de,
-            tb.noi_dung,
-            tb.cap_to_chuc,
-            dv.ho_ten as nguoi_gui
-        FROM thong_bao tb
-        LEFT JOIN doan_vien dv ON tb.nguoi_gui = dv.id
-        ORDER BY tb.id DESC
-        LIMIT 2
-    ";
-    $recent_notifications = mysqli_query($conn, $notifications_query);
-
-} catch(Exception $e) {
+    $stats = getMemberStatistics();
+    $total_members = $stats['total_members'];
+    $total_branches = $stats['total_branches'];
+    $total_events = $stats['total_events'];
+    $unpaid_fees = $stats['unpaid_fees'];
+    $members = $stats['members'];
+    $branch_stats = $stats['branch_stats'];
+    $recent_events = $stats['recent_events'];
+    $recent_notifications = $stats['recent_notifications'];
+} catch (Exception $e) {
     echo "Lỗi: " . $e->getMessage();
     exit;
 }
+
 
 include __DIR__ . '/header.php';
 ?>

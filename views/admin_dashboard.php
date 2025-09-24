@@ -1,81 +1,21 @@
 <?php
 require_once __DIR__ . '/../functions/db_connection.php';
-
-$conn = getDbConnection();
+require_once __DIR__ . '/../functions/admin_dashboard_functions.php';
 
 try {
-    $result = mysqli_query($conn, "SELECT COUNT(*) as total FROM tai_khoan");
-    $total_accounts = mysqli_fetch_assoc($result)['total'];
-
-    $result = mysqli_query($conn, "SELECT vai_tro, COUNT(*) as count FROM tai_khoan GROUP BY vai_tro");
-    $role_stats = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $role_stats[$row['vai_tro']] = $row['count'];
-    }
-
-    $result = mysqli_query($conn, "SELECT trang_thai, COUNT(*) as count FROM tai_khoan GROUP BY trang_thai");
-    $status_stats = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $status_stats[$row['trang_thai']] = $row['count'];
-    }
-
-    $accounts_query = "
-        SELECT 
-            tk.ten_dang_nhap,
-            tk.vai_tro,
-            tk.trang_thai,
-            dv.ho_ten,
-            dv.mssv,
-            dv.email
-        FROM tai_khoan tk
-        LEFT JOIN doan_vien dv ON tk.doan_vien_id = dv.id
-        ORDER BY tk.id DESC
-        LIMIT 10
-    ";
-    $accounts = mysqli_query($conn, $accounts_query);
-
-    $role_details_query = "
-        SELECT 
-            vai_tro,
-            COUNT(*) as so_luong,
-            ROUND((COUNT(*) * 100.0 / $total_accounts), 1) as ti_le
-        FROM tai_khoan 
-        GROUP BY vai_tro
-        ORDER BY so_luong DESC
-    ";
-    $role_details = mysqli_query($conn, $role_details_query);
-
-    $system_events_query = "
-        SELECT 
-            'Hệ thống' as ten_su_kien,
-            CONCAT('Tài khoản mới: ', ten_dang_nhap) as mo_ta,
-            DATE_FORMAT(CURDATE(), '%d/%m/%Y') as ngay_to_chuc_formatted,
-            vai_tro as cap_to_chuc
-        FROM tai_khoan 
-        ORDER BY id DESC 
-        LIMIT 3
-    ";
-    $recent_system_events = mysqli_query($conn, $system_events_query);
-
-    $notifications_query = "
-        SELECT 
-            CONCAT('Thống kê: ', vai_tro) as tieu_de,
-            CONCAT('Số lượng tài khoản: ', COUNT(*), ' (', ROUND((COUNT(*) * 100.0 / $total_accounts), 1), '%)') as noi_dung,
-            'Hệ thống' as cap_to_chuc,
-            'Admin' as nguoi_gui
-        FROM tai_khoan 
-        GROUP BY vai_tro
-        ORDER BY COUNT(*) DESC
-        LIMIT 2
-    ";
-    $recent_notifications = mysqli_query($conn, $notifications_query);
-
+    $stats = getAccountStatistics();
+    $total_accounts = $stats['total_accounts'];
+    $role_stats = $stats['role_stats'];
+    $status_stats = $stats['status_stats'];
+    $accounts = $stats['accounts'];
+    $role_details = $stats['role_details'];
+    $recent_system_events = $stats['recent_system_events'];
+    $recent_notifications = $stats['recent_notifications'];
 } catch (Exception $e) {
     echo "Lỗi: " . $e->getMessage();
     exit;
 }
 ?>
-
 <!doctype html>
 <html lang="en">
 

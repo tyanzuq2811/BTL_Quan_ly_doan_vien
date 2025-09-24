@@ -28,6 +28,9 @@ require_once 'functions/auth.php';
                   <a href="authentication_login.php" class="logo-img d-inline-block mx-2">
                     <img src="assets/images/logos/aiotlab_logo.png" alt="" width="80">
                   </a>
+                  <h4 class="mt-3 mb-0 fw-bold text-primary text-uppercase" style="letter-spacing:2px;">
+                    HỆ THỐNG QUẢN LÝ ĐOÀN VIÊN
+                  </h4>
                 </div>
                 <form action="handle/login_process.php" method="POST">
                   <div class="mb-3">

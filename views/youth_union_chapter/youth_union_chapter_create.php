@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../functions/auth.php';
-checkLogin(__DIR__ . '/../../index.php');
+checkLogin(__DIR__ . '/../../authentication_login.php');
 ?>
 
 <!doctype html>

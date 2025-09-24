@@ -94,8 +94,7 @@ function authenticateUser($conn, $ten_dang_nhap, $mat_khau) {
     if ($result && mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
 
-        // ✅ So sánh mật khẩu thường (plain text)
-        if ($mat_khau === $user['mat_khau']) {
+        if (password_verify($mat_khau, $user['mat_khau'])) {
             mysqli_stmt_close($stmt);
             return $user;
         }

@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                 header('Location: ../views/dashboard.php');
                 break;
             case 'DoanVien':
-                header('Location: ../views/doanvien_dashboard.php');
+                header('Location: ../views/student/dashboard.php');
                 break;
             default:
                 $_SESSION['error'] = 'Vai trò không hợp lệ!';
